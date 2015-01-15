@@ -1,0 +1,13 @@
+
+.frame {
+    border: 3px solid navy;
+    padding: 20px;
+}
+.error {
+    color: red;
+    font-size: 70%;
+}
+thead {
+    background-color: #bfffbf;
+}
+
