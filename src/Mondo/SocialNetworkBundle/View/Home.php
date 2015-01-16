@@ -14,13 +14,15 @@ new Session();
 
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main.css">
+<style>
+<?php echo file_get_contents("../src/Mondo/SocialNetworkBundle/CSS/main.css"); ?>
+</style>
 </head>
 <body>
 
 
 <div style="float:left" class="frame">
-    <form action="go.php" method="post">
+    <form action="app.php?action=go" method="post">
         <div style="float:left" class="frame">
         Name: <input name="name"/>
         </div>

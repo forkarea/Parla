@@ -7,7 +7,6 @@
 
 namespace Mondo\SocialNetworkBundle\Controller;
 
-system('pwd');
 use Mondo\UtilBundle\Core\DB;
 use Mondo\UtilBundle\Core\Session;
 use Mondo\UtilBundle\Core\Text;
