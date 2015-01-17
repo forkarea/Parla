@@ -14,10 +14,16 @@ $actions = [
         include '../src/Mondo/SocialNetworkBundle/View/Home.php';
     },
     'chat' => function() {
-        '../src/Mondo/SocialNetworkBundle/View/Chat.php';
+        include '../src/Mondo/SocialNetworkBundle/View/Chat.php';
     },
     'go' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::go();
+    },
+    'send' => function() {
+        Mondo\SocialNetworkBundle\Controller\ChatController::send();
+    },
+    'upload_photo' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::uploadPhoto();
     }
 ];
 

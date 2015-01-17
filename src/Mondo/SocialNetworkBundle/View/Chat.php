@@ -43,12 +43,11 @@ setInterval( function() {
 
 
 function send() {
-    $.post('send.php', {sender: $id, message: $('#message').val()});
+    $.post('app.php?action=send', {sender: $id, message: $('#message').val()});
     $('#message').val('');
 }
 
 function refresh_image() {
-    console.log('aaa');
     $('#image').attr(image_src+'?'+Math.random());
 }
 
@@ -84,7 +83,7 @@ echo Session::getSessionData('errors');
 <br/>
 
 <?= Session::session('info')  ?>
-<form action="upload_photo.php" method="post" enctype="multipart/form-data" onsubmit="refresh_image()">
+<form action="app.php?action=upload_photo" method="post" enctype="multipart/form-data" onsubmit="refresh_image()">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="upload your photo" name="submit">
@@ -92,8 +91,8 @@ echo Session::getSessionData('errors');
 
 <br/>
 
-<?php if(file_exists(\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
-<img width="250px" height="250px" id="image" src="<?= \Parameters::UPLOADS_DIR.'/'.$key ?>"/>
+<?php if(file_exists('../'.\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
+<img width="250px" height="250px" id="image" src="../<?= \Parameters::UPLOADS_DIR.'/'.$key ?>"/>
 <?php } ?>
 
 <br/>

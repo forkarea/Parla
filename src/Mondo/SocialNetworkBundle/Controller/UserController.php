@@ -21,7 +21,7 @@ class UserController {
             Session::toSession('key', $key);
             Session::toSession('password', $password);
             Session::toSession('errors', '');
-            return 'view2.php';
+            return 'Chat.php';
         } else {
             Session::toSession('errors', 'Not correct username or password');
             return 'Home.php';
@@ -57,5 +57,28 @@ class UserController {
         }
 
         include '../src/Mondo/SocialNetworkBundle/View/'.$loc;
+    }
+
+    private static function upload($fileName, $new) {
+        define ('SITE_ROOT', realpath(dirname(__FILE__)));
+        $target_dir = "./uploads/";
+        if (!file_exists($target_dir)) {
+            mkdir($target_dir, 0777, true);
+        }
+        $target_file = $target_dir . $new;
+        $imageFileType = pathinfo($fileName,PATHINFO_EXTENSION);
+        if ($_FILES["fileToUpload"]["size"] > 500000) return "Sorry, your file is too large.";
+        if(!in_array($imageFileType, ['jpg', 'jpeg', 'png', 'bmp', 'gif'])) return "Sorry, only image files are allowed.";
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
+            return "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        else
+            return "Sorry, there was an error uploading your file.";
+    }
+
+    public static function uploadPhoto() {
+        $file = basename($_FILES["fileToUpload"]["name"]);
+        $key = Session::getSessionData('key');
+        Session::toSession('info', self::upload($file, $key));
+        header('Location: app.php?action=chat');
     }
 }
