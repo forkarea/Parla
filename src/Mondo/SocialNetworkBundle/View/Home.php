@@ -30,7 +30,7 @@ new Session();
 		 Log in</h1>
 	</div>
 	<div class="panel-body">
-		<form action="go.php" method="post">
+		<form action="app.php?action=go" method="post">
 			<div class="frame">
 				<input placeholder="Name" name="name"/>
 			</div>

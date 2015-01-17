@@ -45,9 +45,10 @@ done &&
 popd &&
 #chmod 644 .htaccess &&
 chmod 770 scripts/* &&
-sudo mkdir -p /var/www/html/$path &&
-if [ ! -L /var/www/html/$path$project ]; then
-    sudo ln -s `realpath .` /var/www/html/$path$project
+sudo mkdir -p /var/www/html/public/$path &&
+if [ -a /var/www/html/public/$path$project ]; then
+    sudo rm /var/www/html/public/$path$project
 fi &&
+sudo ln -s `realpath .` /var/www/html/public/$path$project
 sudo /etc/init.d/apache2 restart &&
-gnome-open http://$domain/$path$project/web/app.php
+gnome-open http://$domain/public/$path$project/web/app.php
