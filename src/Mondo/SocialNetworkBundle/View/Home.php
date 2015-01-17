@@ -14,37 +14,47 @@ new Session();
 
 <html>
 <head>
-<style>
-<?php echo file_get_contents("../src/Mondo/SocialNetworkBundle/CSS/main.css"); ?>
-</style>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main.css">
 </head>
 <body>
 
 
-<div style="float:left" class="frame">
-    <form action="app.php?action=go" method="post">
-        <div style="float:left" class="frame">
-        Name: <input name="name"/>
-        </div>
-        <div style="float:left">
-            Or
-        </div>
-        <div style="float:left" class="frame">
-            Key: <input name="key"/>
-            <br/>
-            Password: <input type="password" name="password"/>
-            <br/>
-            <span class="error"><?= Session::getSessionData('errors') ?></span>
-        </div>
-        <div style="clear:both; text-align:center">
-            <input type="checkbox" name="remember" value="yes" />Remember me
-            <br/>
-            <button>OK</button>
-        </div>
-    </form>
+<div class="panel panel-login">
+	<div class="panel-heading">
+		<h1 class="panel-title">
+		<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+		 Log in</h1>
+	</div>
+	<div class="panel-body">
+		<form action="go.php" method="post">
+			<div class="frame">
+				<input placeholder="Name" name="name"/>
+			</div>
+			<div style="float:left">
+				Or
+			</div>
+			</br>
+			<div class="frame">
+				<input placeholder="Enter your username" name="key"/>
+				<br/>
+				<input placeholder="Enter your password" type="password" name="password"/>
+				<br/>
+				<span class="error"><?= Session::getSessionData('errors') ?></span>
+			</div>
+			<div class="go">
+				<input class="checkB" type="checkbox" name="remember" value="yes" /><span class="sign">Keep me signed in</span>
+				<button class="btn btn-success btn-log">LOGIN</button>
+			</div>
+		</form>
+	</div>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../components/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>
 
