@@ -1,0 +1,4 @@
+*.swp
+*.swo
+web/uploads/*
+web/log.txt
