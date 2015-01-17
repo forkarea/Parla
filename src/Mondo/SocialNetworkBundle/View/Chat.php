@@ -26,19 +26,19 @@ $key = Session::getSessionData('key');
 var $id = <?= $id ?>;
 var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 setInterval( function() {
-    $.get('user_table.php', function(data) {
+    $.get('app.php?action=user_table', function(data) {
         $('#user_table').html(data);
     });
 }, 2000);
 
 setInterval( function() {
-    $.get('messages.php', function(data) {
+    $.get('app.php?action=messages', function(data) {
         $('#messages').html(data);
     });
 }, 2000);
 
 setInterval( function() {
-    $.post('notify.php', {sender: $id});
+    $.post('app.php?action=notify', {sender: $id});
 }, 2000);
 
 

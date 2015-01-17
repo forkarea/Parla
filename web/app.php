@@ -24,6 +24,12 @@ $actions = [
     },
     'upload_photo' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::uploadPhoto();
+    },
+    'user_table' => function() {
+        include '../src/Mondo/SocialNetworkBundle/View/UserTable.php';
+    },
+    'messages' => function() {
+        include '../src/Mondo/SocialNetworkBundle/View/Messages.php';
     }
 ];
 
