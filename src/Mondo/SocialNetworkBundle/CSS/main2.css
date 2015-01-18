@@ -1,7 +1,40 @@
+.imgCol{
+	margin-left: -15px;
+}
+
+.name{
+	color:#E68A5C; 
+	font-size:14px;
+	font-weight: bold;
+}
+
+.txtMsg{
+	font-size:14px;
+	margin-left: -20px;
+	width: 620px;
+}
+
+.messageInfo{
+	margin-left: -10px;
+}
+
+.message{
+	height: 40px;
+}
+
+.dateTime{
+	color:green; 
+	font-size:10px; 
+	font-weight: bold;
+}
+
 .chatRow{
 	background: #EDFFDC;
-	padding-top: 50px;
+	padding-top: 30px;
 	padding-left: 10px;
+	padding-bottom: 30px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 
 .chat{
@@ -19,9 +52,9 @@
 
 .chatHistory{
 	border: 3px solid #D5E6C6;
-        overflow: scroll;
-        width: 600px;
-        height: 400px;
+    overflow-y:scroll;
+    width: 838px;
+    height: 400px;
 }
 
 .chatPanel{
@@ -54,6 +87,7 @@
 	padding: 8px;
 	margin-left: 10px;
 	color: #001A00; 
+	height: 170px;
 }
 
 .chooseAvatar{
