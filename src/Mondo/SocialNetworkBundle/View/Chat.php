@@ -65,13 +65,21 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 		<!-- logout-->
 		<div class="col-md-2 logout">
 			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="app.php?action=logout"> log out</a>
+			<br><a href="app.php?action=account_settings">Account settings</a>
 		</div>
 	</div>
-	<br><br><br>
-	<div class="row">
+	<div class="row chatRow">
 		<!-- chat-->
 		<div class="col-md-9">
+<<<<<<< HEAD
 			<div width="300px" height="400px" style="overflow:scroll" id='messages'></div>
+=======
+			<div class="chatHistory"width="300px" height="400px" id='messages'></div>
+			<input class="chat" id='message'/>
+			<button class="btn btn-success sendBtn" onclick='send()'>send</button>
+
+			<div style="width:600px; height:400px; overflow:scroll" id='messages'></div>
+>>>>>>> a89e94deeac2fcb19722673bb457a87c4c8875cf
 			<input id='message'/>
 			<button onclick='send()'>send</button>
 		</div>

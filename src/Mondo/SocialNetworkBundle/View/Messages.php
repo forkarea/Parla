@@ -10,11 +10,12 @@ use Mondo\UtilBundle\Core\Session;
 
 $result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %s', [3]);
 ?>
-<div width="300" height="500" style="overflow:scroll">
+
+<div width="300" height="500" style="overflow-y:scroll; background:#EDFFDC;">
 <?php 
     while($row = $result->fetch_assoc()) {
 ?>
-    <div>
+    <div style="background: white; margin-bottom:5px">
         <?php
             $user = DB::queryRow("SELECT name, mykey FROM users WHERE id='%s'", [$row['sender']]);
             $key = $user['mykey'];
@@ -22,8 +23,10 @@ $result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF
         <?php if(file_exists('../'.\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
             <img width="50px" height="50px" id="image" src="../<?= \Parameters::UPLOADS_DIR.'/'.$key ?>"/>
         <?php } ?>
-        <span style="color:green; font-size:12px"><?= $row['time'] ?></span>
-        <span style="color:blue; font-size:10px"><?= $key ?></span>
+        <span>
+			<span style="color:green; font-size:10px; border: 1px solid green"><?= $row['time'] ?></span>
+			<span style="color:blue; font-size:10px"><?= $key ?></span>
+		</span>
         <span style="color:orange; font-size:12px"><?= $user['name'] ?></span>
         <span style="font-size:24px"><?= $row['text'] ?></span>
     </div>
