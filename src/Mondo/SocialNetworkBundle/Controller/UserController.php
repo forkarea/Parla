@@ -100,4 +100,24 @@ class UserController {
         $id = $_POST['sender'];
         DB::query("UPDATE users SET last_notified=NOW() WHERE ID=%s", [$id]);
     }
+
+    public static function verifMail() {
+
+    }
+
+    private static function sendMail($email, $subject, $msg) {
+        $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
+            ->setUsername('parla.simple.mailer')
+            ->setPassword('QMBfZjpRvPmjzQqIJkYD');
+
+        $mailer = Swift_Mailer::newInstance($transport);
+
+        $message = Swift_Message::newInstance($subject)
+            ->setFrom(array('ajax@chat.com' => 'chat'))
+            ->setTo(array($email))
+            ->setBody($msg);
+
+        $result = $mailer->send($message);
+        return $result;
+    }
 }
