@@ -41,6 +41,7 @@
 	width: 750px;
 	margin-top: -2px;
 	margin-left: 0px;
+        word-break: break-all;
 }
 
 .sendBtn{
@@ -52,9 +53,10 @@
 
 .chatHistory{
 	border: 3px solid #D5E6C6;
-    overflow-y:scroll;
-    width: 838px;
-    height: 400px;
+        overflow-y:scroll;
+        width: 838px;
+        height: 400px;
+        word-break: break-all;
 }
 
 .chatPanel{
