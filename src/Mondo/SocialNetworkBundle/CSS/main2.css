@@ -19,6 +19,9 @@
 
 .chatHistory{
 	border: 3px solid #D5E6C6;
+        overflow: scroll;
+        width: 600px;
+        height: 400px;
 }
 
 .chatPanel{
