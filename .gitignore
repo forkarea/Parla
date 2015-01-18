@@ -1,5 +1,6 @@
 *.swp
 *.swo
+NERD_tree_*
 vendor
 web/uploads/*
 web/log.txt

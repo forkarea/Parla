@@ -1,0 +1,13 @@
+Parla:
+    frontend:
+        better_background: no
+    backend:
+        account_verification: no
+        chat:
+            receiver: [no, 'single and multiple as well']
+            performance: no
+        user_profile: no
+        user_search: no
+        htaccess: no
+    project:
+        server: no
