@@ -63,14 +63,11 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 			?>
 		</div>
 		<!-- logout-->
-<<<<<<< HEAD
 		<div class="col-md-2">
 			<a href="app.php?action=account_settings">Account settings</a>
 			<a href="app.php?action=logout">log out</a>
-=======
 		<div class="col-md-2 logout">
 			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="app.php?action=logout"> log out</a>
->>>>>>> 7701d1ceb3667c36708ea3003bd13d49e626a083
 		</div>
 	</div>
 	<br><br><br>
