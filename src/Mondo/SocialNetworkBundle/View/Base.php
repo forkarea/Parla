@@ -11,10 +11,10 @@
 </head>
 
 <body>
-<div class="logo" >
-    <img width="200px" src="../src/Mondo/SocialNetworkBundle/Images/logo.jpg">
+<div class="logo">
+    <img width="200px" src="../src/Mondo/SocialNetworkBundle/Images/logo.png">
+</div>
 <?php startblock('content') ?>
 <?php endblock() ?>
-</div>
 </body>
 </html>

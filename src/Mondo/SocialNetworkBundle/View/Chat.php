@@ -1,13 +1,4 @@
-<html>
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main2.css">
-	<script src="../components/jquery/jquery-1.11.1.min.js"></script>
-	<script src="../components/bootstrap/js/bootstrap.js"></script>
-
+<?php include 'Base.php' ?>
 <?php
 /****************************************
  *
@@ -26,13 +17,23 @@ $name = Session::getSessionData('name');
 $key = Session::getSessionData('key');
 ?>
 
-<script>
-var $id = <?= $id ?>;
-var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
-</script>
-<script src="../src/Mondo/SocialNetworkBundle/JS/ajax.js"></script>
-</head>
-<body>
+
+<?php startblock('styles') ?>
+    <link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main2.css">
+<?php endblock() ?>
+<?php startblock('javascripts') ?>
+    <script src="../components/jquery/jquery-1.11.1.min.js"></script>
+    <script src="../components/bootstrap/js/bootstrap.js"></script>
+    <script>
+        var $id = <?= $id ?>;
+        var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
+    </script>
+    <script src="../src/Mondo/SocialNetworkBundle/JS/ajax.js"></script>
+<?php endblock() ?>
+
+
+<?php startblock('content') ?>
 
 
 <div class="container chatPanel">
@@ -81,7 +82,4 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 		</div>
 	</div>
 </div>
-</body>
-</html>
-
-
+<?php endblock() ?>
