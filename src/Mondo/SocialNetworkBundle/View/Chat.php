@@ -104,7 +104,7 @@ $(document).ready( function() {
 		</div>
 		<!-- logout-->
 		<div class="col-md-2">
-			<a href="logout.php">log out</a>
+			<a href="app.php?action=logout">log out</a>
 		</div>
 	</div>
 	<br><br><br>
@@ -121,6 +121,8 @@ $(document).ready( function() {
 		</div>
 	</div>
 </div>
+
+
 
 
 

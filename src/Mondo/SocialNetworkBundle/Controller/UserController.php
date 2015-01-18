@@ -28,6 +28,13 @@ class UserController {
         }
     }
 
+    public static function logout() {
+        Session::clearSession();
+        setcookie('key', '', time()-86400*30, '/');
+        setcookie('password', '', time()-86400*30, '/');
+        header("Location: app.php");
+    }
+
     private static function createUser($name) {
         $key = Text::randStrAlpha(12);
         $password = Text::randStrAlpha(16);
@@ -80,5 +87,10 @@ class UserController {
         $key = Session::getSessionData('key');
         Session::toSession('info', self::upload($file, $key));
         header('Location: app.php?action=chat');
+    }
+
+    public static function notify() {
+        $id = $_POST['sender'];
+        DB::query("UPDATE users SET last_notified=NOW() WHERE ID=%s", [$id]);
     }
 }
