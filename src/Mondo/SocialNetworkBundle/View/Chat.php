@@ -12,10 +12,10 @@
 require_once '../app/parameters.php';
 
 use Mondo\UtilBundle\Core\Session;
-use Mondo\SocialNetworkBundle\Controller\MyCookie;
+use Mondo\SocialNetworkBundle\Controller\UserController;
 
-MyCookie::read();
-//if(Session::getSessionData('key') == "") header('Location: view1.php');
+UserController::autoGo('chat');
+
 $id = Session::getSessionData('id');
 $name = Session::getSessionData('name');
 $key = Session::getSessionData('key');
@@ -25,43 +25,8 @@ $key = Session::getSessionData('key');
 <script>
 var $id = <?= $id ?>;
 var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
-setInterval( function() {
-    $.get('app.php?action=user_table', function(data) {
-        $('#user_table').html(data);
-    });
-}, 2000);
-
-setInterval( function() {
-    $.get('app.php?action=messages', function(data) {
-        $('#messages').html(data);
-    });
-}, 2000);
-
-setInterval( function() {
-    $.post('app.php?action=notify', {sender: $id});
-}, 2000);
-
-
-function send() {
-    $.post('app.php?action=send', {sender: $id, message: $('#message').val()});
-    $('#message').val('');
-}
-
-function refresh_image() {
-    $('#image').attr(image_src+'?'+Math.random());
-}
-
-function togglePassword() {
-    $('#password').toggle();
-    $('#passwordButton').html($('#passwordButton').html()[0]=='S' ? 'Hide password' : 'Show password');
-}
-
-$(document).ready( function() {
-    $('#message').keypress(function(e) {
-        if(e.which == 13) send();
-    });
-});
 </script>
+<script src="../src/Mondo/SocialNetworkBundle/JS/ajax.js"></script>
 </head>
 <body>
 

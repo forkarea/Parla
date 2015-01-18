@@ -5,11 +5,9 @@
  *
  ****************************************/
 use Mondo\UtilBundle\Core\Session;
-use Mondo\SocialNetworkBundle\Controller\MyCookie;
+use Mondo\SocialNetworkBundle\Controller\UserController;
 
-new Session();
-//MyCookie::read();
-//if(Session::getSessionData('key') != "") header('Location: view2.php');
+UserController::autoGo('home');
 ?>
 
 <html>

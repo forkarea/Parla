@@ -10,8 +10,15 @@ namespace Mondo\SocialNetworkBundle\Controller;
 use Mondo\UtilBundle\Core\DB;
 use Mondo\UtilBundle\Core\Session;
 use Mondo\UtilBundle\Core\Text;
+use Mondo\SocialNetworkBundle\Controller\MyCookie;
 
 class UserController {
+    public static function autoGo($from) {
+        MyCookie::read();
+        if($from!='home') if(Session::getSessionData('key') == "") header('Location: app.php');
+        if($from=='home') if(Session::getSessionData('key') != "") header('Location: app.php?action=chat');
+    }
+
     private static function login($key, $password) {
         $row = DB::queryRow("SELECT * FROM users WHERE BINARY mykey='%s' and PASSWORD('%s')=password limit 1", [$key, $password]);
 
