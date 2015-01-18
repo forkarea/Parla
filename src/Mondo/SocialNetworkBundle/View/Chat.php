@@ -79,7 +79,7 @@ echo Session::getSessionData('errors');
 ?>
 
 
-<a href="logout.php">log out</a>
+<a href="app.php?action=logout">log out</a>
 <br/>
 
 <?= Session::session('info')  ?>

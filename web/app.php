@@ -30,6 +30,12 @@ $actions = [
     },
     'messages' => function() {
         include '../src/Mondo/SocialNetworkBundle/View/Messages.php';
+    },
+    'notify' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::notify();
+    },
+    'logout' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::logout();
     }
 ];
 
