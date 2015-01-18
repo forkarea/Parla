@@ -9,18 +9,15 @@ use Mondo\SocialNetworkBundle\Controller\UserController;
 
 UserController::autoGo('home');
 ?>
+<?php require_once '../components/arshaw/phpti/src/ti.php' ?>
 
-<html>
-<head>
-	<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php startblock('styles') ?>
 	<link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main.css">
-</head>
-<body>
+<?php endblock() ?>
 
 
+<?php startblock('content') ?>
 <div class="panel panel-login">
 	<div class="panel-heading">
 		<h1 class="panel-title">
@@ -53,6 +50,4 @@ UserController::autoGo('home');
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="../components/bootstrap/js/bootstrap.js"></script>
-</body>
-</html>
-
+<?php endblock() ?>
