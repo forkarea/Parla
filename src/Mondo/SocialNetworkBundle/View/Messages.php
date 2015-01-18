@@ -4,7 +4,6 @@
  * Author: Piotr Sroczkowski
  *
  ****************************************/
-require_once '../app/parameters.php';
 use Mondo\UtilBundle\Core\DB;
 use Mondo\UtilBundle\Core\Session;
 
@@ -24,7 +23,7 @@ $result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF
 					$key = $user['mykey'];
 				?>
 				<?php if(file_exists('../'.\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
-					<img class="imgCol" width="50px" height="50px" id="image" src="../<?= \Parameters::UPLOADS_DIR.'/'.$key ?>"/>
+					<img class="imgCol" width="50px" height="50px" id="image" src="app.php?action=profile_image&user=<?= $user['mykey'] ?>"/>
 				<?php } ?>
 			</div>
 			<!-- info o dacie i nadacy-->

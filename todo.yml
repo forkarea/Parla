@@ -9,5 +9,6 @@ Parla:
         user_profile: no
         user_search: no
         htaccess: no
+        login_length: no
     project:
         server: no

@@ -5,8 +5,6 @@
  * Author: Piotr Sroczkowski
  *
  ****************************************/
-require_once '../app/parameters.php';
-
 use Mondo\UtilBundle\Core\Session;
 use Mondo\SocialNetworkBundle\Controller\UserController;
 
@@ -38,13 +36,13 @@ $key = Session::getSessionData('key');
 
 <div class="container chatPanel">
 	<div class="row userRow">
-		<!-- wyświetlenie zdjecia-->
+                <?php /* displaying profile image */ ?>
 		<div class="col-md-2 avatar">
 			<?php if(file_exists('../'.\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
-				<img width="150px" height="150px" id="image" src="../<?= \Parameters::UPLOADS_DIR.'/'.$key ?>"/>
+                        <img width="150px" height="150px" id="image" src="app.php?action=profile_image&user=<?= Session::getSessionData('key') ?>"/>
 			<?php } ?>
 		</div>
-		<!-- upload zdjecia-->
+                <?php /* photo upload */ ?>
 		<div class="col-md-4 avatarUpload">
 			<form action="app.php?action=upload_photo" method="post" enctype="multipart/form-data" onsubmit="refresh_image()">
 				<span class="glyphicon glyphicon-picture" aria-hidden="true"></span><span class="uploadTxt"> Select image to upload:</span>
@@ -53,7 +51,7 @@ $key = Session::getSessionData('key');
 			</form>
 			<span class="uploadInfo"><?= Session::session('info')  ?></span>
 		</div>
-		<!-- user info-->
+                <?php /* user info */ ?>
 		<div class="col-md-3 userInfo">
 			<span class="glyphicon glyphicon-user infoTxt" aria-hidden="true"></span><span class="infoTxt"> Your name:</span> <?= Session::getSessionData('name') ?> <br/>
 			<span class="glyphicon glyphicon-wrench infoTxt" aria-hidden="true"></span><span class="infoTxt"> Your key:</span> <?= Session::getSessionData('key') ?> <br/>
@@ -63,20 +61,20 @@ $key = Session::getSessionData('key');
 				echo Session::getSessionData('errors'); 
 			?>
 		</div>
-		<!-- logout-->
+                <?php /* logout */ ?>
 		<div class="col-md-2 logout">
 			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="app.php?action=logout"> log out</a>
 			<br><a href="app.php?action=account_settings">Account settings</a>
 		</div>
 	</div>
 	<div class="row chatRow">
-		<!-- chat-->
+                <?php /* chat */ ?>
 		<div class="col-md-9">
 			<div class="chatHistory" id='messages'></div>
 			<input class="chat" id='message'/>
 			<button class="btn btn-success sendBtn" onclick='send()'>send</button>
 		</div>
-		<!--lista userów-->
+                <?php /* user list */ ?>
 		<div class="col-md-3">
 			<div id='user_table'></div>
 		</div>

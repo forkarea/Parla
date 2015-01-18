@@ -4,6 +4,7 @@
  * Author: Piotr Sroczkowski
  *
  ****************************************/
+require_once '../app/parameters.php';
 
 function __autoload($class_name) {
     include '../src/'.str_replace('\\', '/', $class_name) . '.php';
@@ -39,6 +40,9 @@ $actions = [
     },
     'account_settings' => function() {
         include '../src/Mondo/SocialNetworkBundle/View/AccountSettings.php';
+    },
+    'profile_image' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::profileImage($_GET['user']);
     }
 ];
 

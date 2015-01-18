@@ -120,4 +120,16 @@ class UserController {
         $result = $mailer->send($message);
         return $result;
     }
+
+    public static function profileImage() {
+        header('Content-Type: image/png');
+
+        $key = $_GET['user'];
+        $path = '../'.\Parameters::UPLOADS_DIR.'/'.$key;
+        if(file_exists($path)) readfile($path);
+        else {
+            $user = DB::queryRow('SELECT * FROM users WHERE mykey=%s', [$key]);
+        }
+        var_dump($path);
+    }
 }
