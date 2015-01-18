@@ -36,6 +36,9 @@ $actions = [
     },
     'logout' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::logout();
+    },
+    'account_settings' => function() {
+        include '../src/Mondo/SocialNetworkBundle/View/AccountSettings.php';
     }
 ];
 

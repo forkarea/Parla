@@ -65,6 +65,7 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 		<!-- logout-->
 		<div class="col-md-2 logout">
 			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="app.php?action=logout"> log out</a>
+			<br><a href="app.php?action=account_settings">Account settings</a>
 		</div>
 	</div>
 	<div class="row chatRow">
@@ -73,6 +74,10 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 			<div class="chatHistory"width="300px" height="400px" id='messages'></div>
 			<input class="chat" id='message'/>
 			<button class="btn btn-success sendBtn" onclick='send()'>send</button>
+
+			<div style="width:600px; height:400px; overflow:scroll" id='messages'></div>
+			<input id='message'/>
+			<button onclick='send()'>send</button>
 		</div>
 		<!--lista userów-->
 		<div class="col-md-3">
