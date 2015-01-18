@@ -69,6 +69,7 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 		</div>
 		<!-- logout-->
 		<div class="col-md-2">
+			<a href="app.php?action=account_settings">Account settings</a>
 			<a href="app.php?action=logout">log out</a>
 		</div>
 	</div>
@@ -76,7 +77,7 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 	<div class="row">
 		<!-- chat-->
 		<div class="col-md-9">
-			<div width="300px" height="400px" style="overflow:scroll" id='messages'></div>
+			<div style="width:600px; height:400px; overflow:scroll" id='messages'></div>
 			<input id='message'/>
 			<button onclick='send()'>send</button>
 		</div>
