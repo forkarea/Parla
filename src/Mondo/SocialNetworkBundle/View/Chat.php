@@ -26,7 +26,6 @@ $name = Session::getSessionData('name');
 $key = Session::getSessionData('key');
 ?>
 
-
 <script>
 var $id = <?= $id ?>;
 var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
@@ -36,41 +35,42 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 <body>
 
 
-
-
-<div class="container">
-	<h1>Multiuser chat</h1>
-	<div class="row">
+<div class="container chatPanel">
+	<div class="row userRow">
 		<!-- wyświetlenie zdjecia-->
-		<div class="col-md-2">
+		<div class="col-md-2 avatar">
 			<?php if(file_exists('../'.\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
 				<img width="150px" height="150px" id="image" src="../<?= \Parameters::UPLOADS_DIR.'/'.$key ?>"/>
 			<?php } ?>
 		</div>
 		<!-- upload zdjecia-->
-		<div class="col-md-4">
+		<div class="col-md-4 avatarUpload">
 			<form action="app.php?action=upload_photo" method="post" enctype="multipart/form-data" onsubmit="refresh_image()">
-				Select image to upload:
-				<input type="file" name="fileToUpload" id="fileToUpload">
-				<input type="submit" value="upload your photo" name="submit">
+				<span class="glyphicon glyphicon-picture" aria-hidden="true"></span><span class="uploadTxt"> Select image to upload:</span>
+				<input class="chooseAvatar" type="file" name="fileToUpload" id="fileToUpload">
+				<input class="btn btn-success uploadBtn" type="submit" value="upload your photo" name="submit">
 			</form>
-			<?= Session::session('info')  ?>
+			<span class="uploadInfo"><?= Session::session('info')  ?></span>
 		</div>
 		<!-- user info-->
-		<div class="col-md-4">
-			Your name: <?= Session::getSessionData('name') ?> <br/>
-			Your key: <?= Session::getSessionData('key') ?> <br/>
-			<button id="passwordButton" onclick="togglePassword()">Show password</button>
-			<p id="password" style="display:none">Your password: <?= Session::getSessionData('password') ?> </p><br/>
-
+		<div class="col-md-3 userInfo">
+			<span class="glyphicon glyphicon-user infoTxt" aria-hidden="true"></span><span class="infoTxt"> Your name:</span> <?= Session::getSessionData('name') ?> <br/>
+			<span class="glyphicon glyphicon-wrench infoTxt" aria-hidden="true"></span><span class="infoTxt"> Your key:</span> <?= Session::getSessionData('key') ?> <br/>
+			<br><button class="btn btn-success passBtn" id="passwordButton" onclick="togglePassword()">Show password</button>
+			<div class="pass"><p id="password" style="display:none"> <?= Session::getSessionData('password') ?> </p></div>
 			<?php
 				echo Session::getSessionData('errors'); 
 			?>
 		</div>
 		<!-- logout-->
+<<<<<<< HEAD
 		<div class="col-md-2">
 			<a href="app.php?action=account_settings">Account settings</a>
 			<a href="app.php?action=logout">log out</a>
+=======
+		<div class="col-md-2 logout">
+			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="app.php?action=logout"> log out</a>
+>>>>>>> 7701d1ceb3667c36708ea3003bd13d49e626a083
 		</div>
 	</div>
 	<br><br><br>
@@ -87,20 +87,6 @@ var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 </html>
 

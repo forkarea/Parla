@@ -1,11 +1,82 @@
-.userPanel{
-	margin-left: 20px;
-	margin-right: 20px;
-	padding: 10px;
+.chatPanel{
+	background: white;
+	margin-top: 40px;
+	border: 1px solid white;
+	border-radius: 10px;
+	box-shadow: 5px 5px 55px #000000;
 }
 
+.userRow{
+	border: 1px solid gray;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	height: 170px;
+}
 
+.uploadTxt{
+	font-weight: bold;
+}
 
+.avatar{
+	text-align: center;
+	margin-top: 10px;
+}
+
+.avatarUpload{
+	text-align: left;
+	border-right: 1px solid gray;
+	padding: 8px;
+	margin-left: 10px;
+	color: #001A00; 
+}
+
+.chooseAvatar{
+	font-size: 90%;
+	border: 0px;
+}
+
+.uploadBtn{
+	width: 200px;
+	height: 40px;
+}
+
+.uploadInfo{
+	font-size: 80%;
+}
+
+.userInfo{
+	text-align: left;
+	color: #47B224;
+	padding: 15px;
+	font-size: 16px;
+}
+
+.passBtn{
+	height: 34px;
+	text-align: center;
+	vertical-align: center;
+	margin-left: 30px;
+}
+
+.pass{
+	margin-left: 20px;
+	font-size: 90%;
+	padding-top: 5px;
+}
+
+.infoTxt{
+	font-weight: bold;
+	color: #001A00;
+	font-size: 14px;
+}
+
+.logout{
+	text-align: right;
+	padding-top: 8px;
+	font-size: 16px;
+	font-weight: bold;
+
+}
 
 body{
 	background: -webkit-linear-gradient(#5C5C3D, #1F5C1F);
