@@ -46,9 +46,20 @@ $actions = [
     },
     'profile' => function() {
         include '../src/Mondo/SocialNetworkBundle/View/Profile.php';
+    },
+    'change_password' => function() {
+        include '../src/Mondo/SocialNetworkBundle/View/ChangePassword.php';
+    },
+    'account_update' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::accountUpdate();
+    },
+    'update_password' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::updatePassword();
+    },
+    'verify' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::verify();
     }
 ];
-
 
 if(!isset($_GET['action'])) $action = 'home';
 else $action = $_GET['action'];

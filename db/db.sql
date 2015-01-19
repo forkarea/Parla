@@ -24,10 +24,12 @@ CREATE TABLE users (
   birth date DEFAULT NULL,
   gender enum('m', 'f', 'n') DEFAULT 'n',
   orientation enum('hetero', 'homo', 'bi', 'a') DEFAULT NULL,
-  about text DEFAULT '',
+  about text DEFAULT NULL,
   mykey char(255) DEFAULT NULL,
   password char(255) DEFAULT NULL,
+  mail char(255) DEFAULT NULL,
   photo char(255) DEFAULT NULL,
+  verified tinyint(1) DEFAULT 0,
   last_notified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;

@@ -7,6 +7,8 @@
 
 namespace Mondo\SocialNetworkBundle\Controller;
 
+require_once '../vendor/swiftmailer/swiftmailer/lib/swift_required.php';
+
 use Mondo\UtilBundle\Core\DB;
 use Mondo\UtilBundle\Core\Session;
 use Mondo\UtilBundle\Core\Text;
@@ -101,8 +103,9 @@ class UserController {
         DB::query("UPDATE users SET last_notified=NOW() WHERE ID=%s", [$id]);
     }
 
-    public static function verifMail() {
-
+    public static function verify() {
+        $email = DB::queryCell('SELECT mail FROM users WHERE id=%s', [$_GET['id']], 'mail');
+        self::sendMail($email, 'account verification', 'blabla');
     }
 
     private static function sendMail($email, $subject, $msg) {
@@ -135,5 +138,44 @@ class UserController {
                 ];
             readfile('../src/Mondo/SocialNetworkBundle/Images/'.$images[$gender]);
         }
+    }
+
+    public static function accountUpdate() {
+        DB::query("UPDATE users SET mail='%s', name='%s', city='%s', country='%s', birth='%s', gender='%s', orientation='%s', about='%s' WHERE id=%s LIMIT 1",
+            [
+                $_POST['email'],
+                $_POST['name'],
+                $_POST['city'],
+                $_POST['country'],
+                $_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'],
+                $_POST['gender'],
+                $_POST['orientation'],
+                $_POST['about'],
+                $_GET['id']
+                ]);
+        header('Location: app.php?action=chat');
+    }
+
+    public static function updatePassword() {
+        if($_POST['new'] == '') {
+            Session::toSession('errors', 'the password cannot be empty');
+            header('Location: app.php?action=change_password');
+            return;
+        }
+        if($_POST['new'] != $_POST['repeat']) {
+            Session::toSession('errors', 'the passwords are not the same');
+            header('Location: app.php?action=change_password');
+            return;
+        }
+        $isCorrect = DB::queryRow("SELECT password FROM users WHERE id=%s AND password=password('%s') LIMIT 1", [$_GET['id'], $_POST['current']], 'password');
+        var_dump($isCorrect);
+        if(!$isCorrect) {
+            Session::toSession('errors', 'incorrect password');
+            header('Location: app.php?action=change_password');
+            return;
+        }
+        DB::query("UPDATE users SET password=password('%s') WHERE id=%s LIMIT 1", [$_POST['new'], $_GET['id']]);
+        Session::toSession('errors', $_POST['new']);
+        header('Location: app.php?action=chat');
     }
 }

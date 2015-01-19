@@ -15,6 +15,13 @@ Parla:
         user_search: no
         htaccess: no
         login_length: no
+        captcha: no
+        login_with_mail: no
     project:
         server: no
         file_singature: no
+    bugs:
+        user_table: no
+        'Not correct username or password - on chat': no
+        go_redirect: no
+        bootstrap: no
