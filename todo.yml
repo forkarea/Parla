@@ -1,11 +1,15 @@
 Parla:
     frontend:
         better_background: no
+        emoticons: no
+        message_alert: no
     backend:
         account_verification: no
         account_settings: no
         chat:
-            receiver: [no, 'single and multiple as well']
+            receiver:
+                single: yes
+                multiple: no
             performance: no
         user_profile: yes
         user_search: no

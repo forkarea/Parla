@@ -7,7 +7,12 @@
 use Mondo\UtilBundle\Core\DB;
 use Mondo\UtilBundle\Core\Session;
 
-$result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %s', [3]);
+$sender = $_GET['sender'];
+$receiver = $_GET['receiver'];
+file_put_contents('log.txt', "\n\nsender=".$sender, FILE_APPEND);
+file_put_contents('log.txt', "\n\nreceiver=".$receiver, FILE_APPEND);
+$result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s)',
+    [3, $sender, $receiver]);
 ?>
 
 <div width="300" height="500" style="background:#EDFFDC;">

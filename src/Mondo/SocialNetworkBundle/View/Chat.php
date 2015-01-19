@@ -26,6 +26,7 @@ $key = Session::getSessionData('key');
     <script>
         var $id = <?= $id ?>;
         var image_src = '<?= \Parameters::UPLOADS_DIR.'/'.$key ?>';
+        var receiver = null;
     </script>
     <script src="../src/Mondo/SocialNetworkBundle/JS/ajax.js"></script>
 <?php endblock() ?>

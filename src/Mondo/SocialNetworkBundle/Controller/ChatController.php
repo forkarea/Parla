@@ -13,9 +13,9 @@ use Mondo\UtilBundle\Core\Session;
 class ChatController {
     public static function send() {
         $sender = $_POST['sender'];
+        $receiver = $_POST['receiver'];
         $text = $_POST['message'];
-        file_put_contents('log.txt', "sender=$sender\n\n", FILE_APPEND);
-        DB::query("INSERT INTO messages (text, sender) VALUES ('%s', '%s')", [$text, $sender]);
+        DB::query("INSERT INTO messages (text, sender, receiver) VALUES ('%s', '%s', '%s')", [$text, $sender, $receiver]);
     }
 }
 

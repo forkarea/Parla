@@ -5,7 +5,7 @@ setInterval( function() {
 }, 2000);
 
 setInterval( function() {
-    $.get('app.php?action=messages', function(data) {
+    $.get('app.php?action=messages&sender='+$id+'&receiver='+receiver, function(data) {
         $('#messages').html(data);
     });
 }, 2000);
@@ -16,7 +16,7 @@ setInterval( function() {
 
 
 function send() {
-    $.post('app.php?action=send', {sender: $id, message: $('#message').val()});
+    $.post('app.php?action=send', {sender: $id, receiver: receiver, message: $('#message').val()});
     $('#message').val('');
 }
 
@@ -27,6 +27,11 @@ function refresh_image() {
 function togglePassword() {
     $('#password').toggle();
     $('#passwordButton').html($('#passwordButton').html()[0]=='S' ? 'Hide password' : 'Show password');
+}
+
+function userClick(id, key) {
+    receiver = id;
+    $('#user-'+key).css('background-color', 'red');
 }
 
 $(document).ready( function() {
