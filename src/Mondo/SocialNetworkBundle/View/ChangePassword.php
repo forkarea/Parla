@@ -5,15 +5,50 @@ use Mondo\UtilBundle\Core\Session;
 <?php startblock('javascripts') ?>
 <?php endblock() ?>
 <?php startblock('styles') ?>
+	<link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/passChange.css">
 <?php endblock() ?>
 <?php startblock('content') ?>
-Change password <br/>
-<form action="app.php?action=update_password&id=<?= Session::getSessionData('id') ?>" method="post">
-    Current password: <input type="password" name="current" /> <br/>
-    New password: <input type="password" name="new" /> <br/>
-    Repeat password: <input type="password" name="repeat" /> <br/>
-    <input type="submit" value="OK"/>
-</form>
+<div class="panel panel-settings">
+	<div class="panel-heading">
+		<h1 class="panel-title">
+		<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+		 Change password</h1>
+	</div>
+	<div class="panel-body">
+		<form action="app.php?action=update_password&id=<?= Session::getSessionData('id') ?>" method="post">
+			<div class="row row-sett">
+					<div class="col-md-6 panel-txt">
+						Current password: 
+					</div>
+					<div class="col-md-6">
+						<input type="password" name="current" />
+					</div>
+			</div>
+			<div class="row row-sett new-row">
+					<div class="col-md-6 panel-txt">
+						New password:  
+					</div>
+					<div class="col-md-6">
+						<input type="password" name="new" />
+					</div>
+			</div>
+			<div class="row row-sett">
+					<div class="col-md-6 panel-txt">
+						Repeat new password:
+					</div>
+					<div class="col-md-6">
+						<input type="password" name="repeat" />
+					</div>
+			</div>
+			<div class="row row-sett btn-row">
+					<div class="col-md-12">
+						<input class="btn btn-success submit-btn" type="submit" value="SUBMIT"/>
+					</div>
+			</div>
+		</form>
+	</div>
+</div>
 <?= Session::getSessionData('errors'); ?>
 <?php endblock() ?>
 

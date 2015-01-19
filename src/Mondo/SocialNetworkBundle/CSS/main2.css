@@ -118,16 +118,15 @@
 }
 
 .chatHistory{
-		border: 3px solid #D5E6C6;
-        overflow-y:scroll;
-        width: 838px;
-        height: 400px;
-        word-break: break-all;
+	border: 3px solid #D5E6C6;
+    overflow-y:scroll;
+    width: 838px;
+    height: 400px;
+    word-break: break-all;
 }
 
 .chatPanel{
 	background: white;
-	margin-top: 40px;
 	border: 1px solid white;
 	border-radius: 10px;
 	box-shadow: 5px 5px 55px #000000;
