@@ -15,7 +15,6 @@ $name = Session::getSessionData('name');
 $key = Session::getSessionData('key');
 ?>
 
-
 <?php startblock('styles') ?>
     <link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main2.css">
@@ -31,9 +30,7 @@ $key = Session::getSessionData('key');
     <script src="../src/Mondo/SocialNetworkBundle/JS/ajax.js"></script>
 <?php endblock() ?>
 
-
 <?php startblock('content') ?>
-
 
 <div class="container chatPanel">
 	<div class="row userRow">
@@ -69,6 +66,10 @@ $key = Session::getSessionData('key');
 	<div class="row chatRow">
                 <?php /* chat */ ?>
 		<div class="col-md-9">
+			<div class="chatTitle">
+				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+				<span style="font-weight:bold">CHAT: </span>(add reciver)
+			</div>
 			<div class="chatHistory" id='messages'></div>
 			<input class="chat" id='message'/>
 			<button class="btn btn-success sendBtn" onclick='send()'>send</button>
