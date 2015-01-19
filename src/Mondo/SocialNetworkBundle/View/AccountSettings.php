@@ -1,6 +1,9 @@
 <?php include 'Base.php' ?>
 <?php
 use Mondo\UtilBundle\Core\Session;
+use Mondo\UtilBundle\Core\DB;
+
+$user = DB::queryRow('SELECT * FROM users WHERE id=%s LIMIT 1', [Session::getSessionData('id')]);
 ?>
 <?php startblock('javascripts') ?>
 <?php endblock() ?>
@@ -25,12 +28,12 @@ use Mondo\UtilBundle\Core\Session;
 			</div>
 			<div class="col-md-12">
 			<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-				<a href="app.php?action=verify&id=<?= Session::getSessionData('id') ?>">Verify e-mail address</a> <br/>
+				<a href="app.php?action=verify&id=<?= $user['id'] ?>">Verify e-mail address</a> <br/>
 			</div>
 		</div>
 	</div>
 		<div class="row dataSett">
-			<form action="app.php?action=account_update&id=<?= Session::getSessionData('id') ?>" method="post">
+			<form action="app.php?action=account_update&id=<?= $user['id'] ?>" method="post">
 			<div class="col-md-6">
 				<div class="row row-sett">
 				<div class="border">
@@ -46,7 +49,7 @@ use Mondo\UtilBundle\Core\Session;
 						E-mail address: 
 					</div>
 					<div class="col-md-8">
-						<input name="email" />
+                                            <input name="email" value="<?= $user['mail'] ?>" />
 					</div>
 				</div>
 				<div class="row row-sett">
@@ -54,7 +57,7 @@ use Mondo\UtilBundle\Core\Session;
 						Name: 
 					</div>
 					<div class="col-md-8">
-						<input name="name" />
+						<input name="name" value="<?= $user['name'] ?>" />
 					</div>
 				</div>
 				<div class="row row-sett">
@@ -62,7 +65,7 @@ use Mondo\UtilBundle\Core\Session;
 						City: 
 					</div>
 					<div class="col-md-8">
-						<input name="city" />
+						<input name="city" value="<?= $user['city'] ?>" />
 					</div>
 				</div>
 				<div class="row row-sett">
@@ -70,7 +73,7 @@ use Mondo\UtilBundle\Core\Session;
 						Country: 
 					</div>
 					<div class="col-md-8">
-						<input name="country" />
+						<input name="country" value="<?= $user['country'] ?>" />
 					</div>
 				</div>
 			</div>
@@ -78,11 +81,13 @@ use Mondo\UtilBundle\Core\Session;
 				<div class="row row-sett">
 					<div class="col-md-4">
 						Date of birth: 
+                                                <?= Session::getSessionData('errors_birth') ?>
 					</div>
 					<div class="col-md-8">
-						<input placeholder="dd" class="dateInput" name="day" />
-						<input placeholder="mm" class="dateInput" name="month" />
-						<input placeholder="yyyy" class="yearInput" name="year" />
+                                        <?php $birth = new \DateTime($user['birth']) ?>
+                                        <input placeholder="dd" class="dateInput" name="day" value="<?= $birth->format('d') ?>" />
+						<input placeholder="mm" class="dateInput" name="month" value="<?= $birth->format('m') ?>"  />
+						<input placeholder="yyyy" class="yearInput" name="year" value="<?= $birth->format('Y') ?>"  />
 					</div>
 				</div>
 				<div class="row row-sett">
@@ -91,9 +96,9 @@ use Mondo\UtilBundle\Core\Session;
 					</div>
 					<div class="col-md-8">
 						<select class="selects" name="gender">
-							<option value="m">male</option>
-							<option value="f">female</option>
-							<option value="n">other</option>
+                                                        <option value="m" <?php if($user['gender']=='m') echo 'selected' ?> >male</option>
+							<option value="f" <?php if($user['gender']=='f') echo 'selected' ?> >female</option>
+							<option value="n" <?php if($user['gender']=='n') echo 'selected' ?> >other</option>
 						</select>
 					</div>
 				</div>
@@ -103,10 +108,10 @@ use Mondo\UtilBundle\Core\Session;
 					</div>
 					<div class="col-md-8">
 						<select class="selects" name="orientation">
-							<option value="hetero">heterosexual</option>
-							<option value="homo">homosexual</option>
-							<option value="bi">bisexual</option>
-							<option value="a">asexual</option>
+							<option value="hetero" <?php if($user['orientation']=='hetero') echo 'selected' ?> >heterosexual</option>
+							<option value="homo" <?php if($user['orientation']=='homo') echo 'selected' ?> >homosexual</option>
+							<option value="bi" <?php if($user['orientation']=='bi') echo 'selected' ?> >bisexual</option>
+							<option value="a" <?php if($user['orientation']=='a') echo 'selected' ?> >asexual</option>
 						</select>
 					</div>
 				</div>
@@ -115,7 +120,7 @@ use Mondo\UtilBundle\Core\Session;
 						About you: 
 					</div>
 					<div class="col-md-8">
-						<textarea name="about"></textarea>
+						<textarea name="about"><?= $user['about'] ?></textarea>
 					</div>
 				</div>
 				<div class="row row-sett">

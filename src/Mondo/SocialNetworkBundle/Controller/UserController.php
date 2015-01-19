@@ -140,7 +140,24 @@ class UserController {
         }
     }
 
+    private static function validateBirth($birth) {
+        set_error_handler(function() {
+            throw new \Exception('incorrect or missing parameters');
+        });
+        try {
+            new \DateTime($birth);
+        } catch(\Exception $e) {
+            return false;
+        }
+        return true;
+    }
+
     public static function accountUpdate() {
+        if(!self::validateBirth($_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'])) {
+            Session::toSession('errors_birth', 'not correct date of birth');
+            header('Location: app.php?action=account_settings');
+            return;
+        }
         DB::query("UPDATE users SET mail='%s', name='%s', city='%s', country='%s', birth='%s', gender='%s', orientation='%s', about='%s' WHERE id=%s LIMIT 1",
             [
                 $_POST['email'],

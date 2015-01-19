@@ -18,7 +18,7 @@ CREATE TABLE messages (
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id int(11) NOT NULL AUTO_INCREMENT,
-  name char(255) DEFAULT NULL,
+  name char(16) DEFAULT NULL,
   city char(255) DEFAULT NULL,
   country char(255) DEFAULT NULL,
   birth date DEFAULT NULL,
