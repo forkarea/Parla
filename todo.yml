@@ -3,12 +3,14 @@ Parla:
         better_background: no
     backend:
         account_verification: no
+        account_settings: no
         chat:
             receiver: [no, 'single and multiple as well']
             performance: no
-        user_profile: no
+        user_profile: yes
         user_search: no
         htaccess: no
         login_length: no
     project:
         server: no
+        file_singature: no

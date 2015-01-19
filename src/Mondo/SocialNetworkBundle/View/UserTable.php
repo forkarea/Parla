@@ -35,7 +35,11 @@ $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIME
 						<span class="name"><?= $row['name'] ?></span>
 					</div>
 					<div class="row">
-						<span style="color:#52CC7A; font-size:10px">(<?= $row['mykey'] ?>)</span>
+                                                <span class="user_key">
+                                                    <a href="app.php?action=profile&user=<?= $row['mykey'] ?>">
+                                                        (<?= $row['mykey'] ?>)
+                                                    </a>
+                                                </span>
 					</div>
 				</div>
 			<?php } ?>

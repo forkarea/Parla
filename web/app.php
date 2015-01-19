@@ -43,6 +43,9 @@ $actions = [
     },
     'profile_image' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::profileImage($_GET['user']);
+    },
+    'profile' => function() {
+        include '../src/Mondo/SocialNetworkBundle/View/Profile.php';
     }
 ];
 

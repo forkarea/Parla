@@ -33,7 +33,11 @@ $result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF
 					<span class="name"><?= $user['name'] ?></span>
 					</div>
 				<div class="row">
-					<span style="color:#52CC7A; font-size:10px">(<?= $key ?>)</span>
+                                        <span class="user_key">
+                                            <a href="app.php?action=profile&user=<?= $key ?>">
+                                                (<?= $key ?>)
+                                            </a>
+                                        </span>
 				</div>
 			</div>
 			<!--treść wiadomości-->
