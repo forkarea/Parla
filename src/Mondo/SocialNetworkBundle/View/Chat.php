@@ -38,9 +38,7 @@ $key = Session::getSessionData('key');
 	<div class="row userRow">
                 <?php /* displaying profile image */ ?>
 		<div class="col-md-2 avatar">
-			<?php if(file_exists('../'.\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
                         <img width="150px" height="150px" id="image" src="app.php?action=profile_image&user=<?= Session::getSessionData('key') ?>"/>
-			<?php } ?>
 		</div>
                 <?php /* photo upload */ ?>
 		<div class="col-md-4 avatarUpload">

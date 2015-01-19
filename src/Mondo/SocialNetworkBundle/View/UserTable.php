@@ -28,9 +28,7 @@ $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIME
 		<div class="row singleUser" style="background: white; margin-bottom:5px">
 			<?php if(!$me) { ?>
 				<div class="col-md-3 userAv">
-					<?php if(file_exists('../'.\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
-						<img width="50px" height="50px" id="image" src="../<?= \Parameters::UPLOADS_DIR.'/'.$key ?>"/>
-					<?php } ?>
+						<img width="50px" height="50px" id="image" src="app.php?action=profile_image&user=<?= $row['mykey'] ?>"/>
 				</div>
 				<div class="col-md-8 onlineUserInfo">
 					<div class="row">

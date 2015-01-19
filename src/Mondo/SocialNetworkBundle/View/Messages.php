@@ -22,9 +22,7 @@ $result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF
 					$user = DB::queryRow("SELECT name, mykey FROM users WHERE id='%s'", [$row['sender']]);
 					$key = $user['mykey'];
 				?>
-				<?php if(file_exists('../'.\Parameters::UPLOADS_DIR.'/'.$key)) { ?>
 					<img class="imgCol" width="50px" height="50px" id="image" src="app.php?action=profile_image&user=<?= $user['mykey'] ?>"/>
-				<?php } ?>
 			</div>
 			<!-- info o dacie i nadacy-->
 			<div class="col-md-2 messageInfo">
