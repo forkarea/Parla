@@ -43,9 +43,9 @@ class Parameters {
     const SMTP_SERVER = '$9';
 
     /** SMTP user */
-    const SMTP_USER = '$10';
+    const SMTP_USER = '${10}';
 
     /** SMTP password */
-    const SMTP_PASSWORD = '$11';
+    const SMTP_PASSWORD = '${11}';
 }
 EOF

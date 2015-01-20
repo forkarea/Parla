@@ -77,7 +77,8 @@ class UserController {
             setcookie('password', Session::getSessionData('password'), time()+86400*30, '/');
         }
 
-        include '../src/Mondo/SocialNetworkBundle/View/'.$loc;
+        //include '../src/Mondo/SocialNetworkBundle/View/'.$loc;
+        header('Location: app.php');
     }
 
     private static function upload($fileName, $new) {

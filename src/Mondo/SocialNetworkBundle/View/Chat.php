@@ -18,6 +18,7 @@ $key = Session::getSessionData('key');
 <?php startblock('styles') ?>
     <link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/chat.css">
+    <link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/user_table.css">
 	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main.css">
 <?php endblock() ?>
 <?php startblock('javascripts') ?>

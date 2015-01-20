@@ -29,4 +29,13 @@ class Parameters {
 
     /** Name of project on server */
     const PROJECT_NAME = 'Parla';
+
+    /** SMTP user */
+    const SMTP_SERVER = 'smtp.gmail.com';
+
+    /** SMTP user */
+    const SMTP_USER = 'parla.simple.mailer';
+
+    /** SMTP password */
+    const SMTP_PASSWORD = 'QMBfZjpRvPmjzQqIJkYD';
 }
