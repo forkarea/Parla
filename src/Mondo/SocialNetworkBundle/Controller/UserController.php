@@ -49,20 +49,19 @@ class UserController {
         $key = Text::randStrAlpha(12);
         $password = Text::randStrAlpha(16);
 
-        Session::toSession('name', $name);
-        Session::toSession('key', $key);
-        Session::toSession('password', $password);
-
         DB::query("INSERT INTO users (name, mykey, password) VALUES ('%s', '%s', PASSWORD('%s'))", [$name, $key, $password]);
         $id = DB::queryCell("SELECT id FROM users WHERE BINARY mykey='%s'", [$key], 'id');
-        Session::toSession('id', $id);
-        Session::toSession('errors', '');
-        echo 'name='.$name;
-        if($name=='') {
-            echo 'adsdas';
+
+        if(!self::validateName($name)) {
+            Session::clearSession();
             Session::toSession('errors_name', 'Incorrect name');
             return 'Home.php';
         }
+        Session::toSession('id', $id);
+        Session::toSession('errors', '');
+        Session::toSession('name', $name);
+        Session::toSession('key', $key);
+        Session::toSession('password', $password);
         return 'Chat.php';
     }
 
@@ -79,7 +78,7 @@ class UserController {
             setcookie('password', Session::getSessionData('password'), time()+86400*30, '/');
         }
 
-        //include '../src/Mondo/SocialNetworkBundle/View/'.$loc;
+        include '../src/Mondo/SocialNetworkBundle/View/'.$loc;
     }
 
     private static function upload($fileName, $new) {
