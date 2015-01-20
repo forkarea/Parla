@@ -29,6 +29,7 @@ UserController::autoGo('home');
 		<form action="app.php?action=go" method="post">
 			<div class="frame">
 				<input placeholder="Name" name="name"/>
+				<span class="error"><?= Session::getSessionData('errors_name') ?></span>
 			</div>
 			<div style="float:left">
 				Or

@@ -30,9 +30,10 @@ class UserController {
             Session::toSession('key', $key);
             Session::toSession('password', $password);
             Session::toSession('errors', '');
+            Session::toSession('errors_name', '');
             return 'Chat.php';
         } else {
-            Session::toSession('errors', 'Not correct username or password');
+            Session::toSession('errors', 'Incorrect username or password');
             return 'Home.php';
         }
     }
@@ -56,6 +57,12 @@ class UserController {
         $id = DB::queryCell("SELECT id FROM users WHERE BINARY mykey='%s'", [$key], 'id');
         Session::toSession('id', $id);
         Session::toSession('errors', '');
+        echo 'name='.$name;
+        if($name=='') {
+            echo 'adsdas';
+            Session::toSession('errors_name', 'Incorrect name');
+            return 'Home.php';
+        }
         return 'Chat.php';
     }
 
@@ -72,7 +79,7 @@ class UserController {
             setcookie('password', Session::getSessionData('password'), time()+86400*30, '/');
         }
 
-        include '../src/Mondo/SocialNetworkBundle/View/'.$loc;
+        //include '../src/Mondo/SocialNetworkBundle/View/'.$loc;
     }
 
     private static function upload($fileName, $new) {
@@ -109,13 +116,16 @@ class UserController {
     }
 
     private static function sendMail($email, $subject, $msg) {
-        $transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
+        function __autoload($class_name) {
+        }
+
+        $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
             ->setUsername('parla.simple.mailer')
             ->setPassword('QMBfZjpRvPmjzQqIJkYD');
 
-        $mailer = Swift_Mailer::newInstance($transport);
+        $mailer = \Swift_Mailer::newInstance($transport);
 
-        $message = Swift_Message::newInstance($subject)
+        $message = \Swift_Message::newInstance($subject)
             ->setFrom(array('ajax@chat.com' => 'chat'))
             ->setTo(array($email))
             ->setBody($msg);
@@ -140,6 +150,11 @@ class UserController {
         }
     }
 
+    private static function validateName($name) {
+        if(is_string($name)) if(strlen($name)>0) return true;
+        return false;
+    }
+
     private static function validateBirth($birth) {
         set_error_handler(function() {
             throw new \Exception('incorrect or missing parameters');
@@ -154,7 +169,12 @@ class UserController {
 
     public static function accountUpdate() {
         if(!self::validateBirth($_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'])) {
-            Session::toSession('errors_birth', 'not correct date of birth');
+            Session::toSession('errors_birth', 'incorrect date of birth');
+            header('Location: app.php?action=account_settings');
+            return;
+        }
+        if(!self::validateName($_POST['name'])) {
+            Session::toSession('errors_name', 'incorrect name');
             header('Location: app.php?action=account_settings');
             return;
         }
@@ -170,6 +190,7 @@ class UserController {
                 $_POST['about'],
                 $_GET['id']
                 ]);
+        Session::toSession('name', $_POST['name']);
         header('Location: app.php?action=chat');
     }
 
@@ -192,7 +213,7 @@ class UserController {
             return;
         }
         DB::query("UPDATE users SET password=password('%s') WHERE id=%s LIMIT 1", [$_POST['new'], $_GET['id']]);
-        Session::toSession('errors', $_POST['new']);
+        Session::toSession('password', $_POST['new']);
         header('Location: app.php?action=chat');
     }
 }

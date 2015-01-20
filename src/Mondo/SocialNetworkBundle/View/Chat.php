@@ -61,6 +61,7 @@ $key = Session::getSessionData('key');
 		<div class="col-md-2 logout">
 			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="app.php?action=logout"> log out</a> <br/>
                         <a href="app.php?action=account_settings">Account settings</a> <br/>
+                        <a href="app.php?action=search">Search</a> <br/>
 		</div>
 	</div>
 	<div class="row chatRow">

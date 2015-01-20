@@ -55,6 +55,7 @@ $user = DB::queryRow('SELECT * FROM users WHERE id=%s LIMIT 1', [Session::getSes
 				<div class="row row-sett">
 					<div class="col-md-4">
 						Name: 
+                                                <?= Session::getSessionData('errors_name') ?>
 					</div>
 					<div class="col-md-8">
 						<input name="name" value="<?= $user['name'] ?>" />

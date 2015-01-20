@@ -7,7 +7,8 @@
 require_once '../app/parameters.php';
 
 function __autoload($class_name) {
-    include '../src/'.str_replace('\\', '/', $class_name) . '.php';
+    $path = '../src/'.str_replace('\\', '/', $class_name) . '.php';
+    if(file_exists($path)) include $path;
 }
 
 $actions = [
@@ -58,6 +59,9 @@ $actions = [
     },
     'verify' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::verify();
+    },
+    'search' => function() {
+        include '../src/Mondo/SocialNetworkBundle/View/Search.php';
     }
 ];
 
