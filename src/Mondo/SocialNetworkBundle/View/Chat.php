@@ -98,7 +98,7 @@ $key = Session::getSessionData('key');
 			<div class="chat-box">
 				<div class="chatTitle">
 					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-					<span style="font-weight:bold">CHAT: </span>(select reciver)
+					<span style="font-weight:bold">CHAT: </span><span id="chat_partner">(select chat partner)</span>
 				</div>
 				<div class="chatHistory" id='messages'></div>
 				<input class="chat" id='message'/>

@@ -27,7 +27,7 @@ $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIME
 		?>
                     <?php if(!$me) { ?>
                     <div 
-                        id="user-<?= $row['mykey'] ?>" onclick="userClick(<?php echo $row['id'].', \''.$row['mykey'].'\'' ?>)"
+                        id="user-<?= $row['mykey'] ?>" onclick="userClick(<?php echo $row['id'].', \''.$row['mykey'].'\', \''.$row['name'].'\'' ?>)"
                         class="row singleUser" style="background: white; margin-bottom:5px"
                     >
 				<div class="col-md-3 userAv">

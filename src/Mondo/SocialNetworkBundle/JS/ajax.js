@@ -29,8 +29,9 @@ function togglePassword() {
     $('#passwordButton').html($('#passwordButton').html()[0]=='S' ? 'Hide password' : 'Show password');
 }
 
-function userClick(id, key) {
+function userClick(id, key, name) {
     receiver = id;
+    $('#chat_partner').html(''+key+', '+name);
     $('#user-'+key).css('background-color', 'red');
 }
 
