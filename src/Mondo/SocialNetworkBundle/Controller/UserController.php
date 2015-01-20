@@ -126,7 +126,7 @@ class UserController {
     }
 
     private static function validateName($name) {
-        if(is_string($name)) if(strlen($name)>0) return true;
+        if(is_string($name)) if(strlen($name)>0 && strlen($name)<16) return true;
         return false;
     }
 
