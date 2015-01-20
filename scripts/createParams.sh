@@ -29,5 +29,23 @@ class Parameters {
 
     /** Uploads directory */
     const UPLOADS_DIR = '$5';
+
+    /** Domain name */
+    const DOMAIN_NAME = '$6';
+
+    /** Path to project on server */
+    const PATH = '$7';
+
+    /** Name of project on server */
+    const PROJECT_NAME = '$8';
+
+    /** SMTP user */
+    const SMTP_SERVER = '$9';
+
+    /** SMTP user */
+    const SMTP_USER = '$10';
+
+    /** SMTP password */
+    const SMTP_PASSWORD = '$11';
 }
 EOF

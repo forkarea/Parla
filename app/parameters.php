@@ -20,4 +20,13 @@ class Parameters {
 
     /** Uploads directory */
     const UPLOADS_DIR = 'web/uploads';
+
+    /** Domain name */
+    const DOMAIN_NAME = 'localhost';
+
+    /** Path to project on server */
+    const PATH = 'cgi/examples/';
+
+    /** Name of project on server */
+    const PROJECT_NAME = 'Parla';
 }

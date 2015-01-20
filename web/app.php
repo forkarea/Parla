@@ -58,7 +58,8 @@ $actions = [
         Mondo\SocialNetworkBundle\Controller\UserController::updatePassword();
     },
     'verify' => function() {
-        Mondo\SocialNetworkBundle\Controller\UserController::verify();
+        //Mondo\SocialNetworkBundle\Controller\UserController::verify();
+        header('Location: ../src/Mondo/SocialNetworkBundle/Controller/MailController.php?id='.$_GET['id']);
     },
     'search' => function() {
         include '../src/Mondo/SocialNetworkBundle/View/Search.php';

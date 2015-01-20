@@ -14,6 +14,8 @@ path=cgi/examples/
 project=Parla
 domain=localhost
 uploadsDir=web/uploads
+smtp_server='
+smtp_user=
 
 #sudo apt-get update &&
 toinst=(realpath curl git apache2 php5 php5-cli mysql-client mysql-server php5-mysql) &&
@@ -22,7 +24,7 @@ for i in "${toinst[@]}"; do
     echo y | sudo apt-get install $i
 done &&
 cd $(dirname $(realpath $0)) &&
-./createParams.sh $db $dbUser $dbPass $dbHost $uploadsDir &&
+./createParams.sh $db $dbUser $dbPass $dbHost $uploadsDir $domain $path $project &&
 cd .. &&
 printf "\n\nmysql:" &&
 mysql -u root -p -e "grant all on $db.* to '$dbUser'@'localhost' identified by '$dbPass'; flush privileges; drop database if exists $db; create database $db" &&
