@@ -1,0 +1,40 @@
+input{
+	width: 180px;
+	font-weight: normal;
+	font-size: 80%;
+}
+
+.frame{
+	margin: 10px;
+	margin-bottom: -20px;
+	text-align: left;
+}
+
+.new-row{
+	margin-top: 20px;
+}
+
+.panel-txt{
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.submit-btn{
+	height: 50px;
+	font-weight: bold;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	width: 410px;
+	margin-left: -15px;
+	margin-right: -15px;
+	margin-top: 0px;
+}
+
+.row-sett{
+	background: #E0FFC2;
+	margin-bottom: 5px;
+}
+
+

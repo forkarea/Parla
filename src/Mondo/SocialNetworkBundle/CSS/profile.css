@@ -1,0 +1,54 @@
+.border{
+	border: 1px solid #ADD6AD;
+	margin: 10px;
+	height: 100px;
+}
+
+.info-txt{
+	font-weight: bold;
+}
+
+.name-txt{
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+.user_key{
+    color: #52CC7A; 
+    font-size: 12px;
+}
+
+.name{
+	color: #009999; 
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.submit-btn{
+	height: 64px;
+	font-weight: bold;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+	width: 396px;
+	margin-left: -15px;
+	margin-top: 0px;
+}
+
+.img{
+	margin-top: 8px;
+}
+
+.row-sett{
+	background: #E0FFC2;
+	margin-bottom: 5px;
+	width: 350px;
+}
+
+.panel-parla{
+	text-align: left;
+}
+
+
+

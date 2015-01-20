@@ -25,10 +25,10 @@ $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIME
 			while($row = $result->fetch_assoc()) {
 			$me = $row['mykey']==$key;
 		?>
-                    <div 
-                        id="user-<?= $row['mykey'] ?>" onclick="userClick(<?php echo $row['id'].', \''.$row['mykey'].'\'' ?>)"
-                        class="row singleUser" style="background: white; margin-bottom:5px"
-                    >
+        <div 
+        id="user-<?= $row['mykey'] ?>" onclick="userClick(<?php echo $row['id'].', \''.$row['mykey'].'\'' ?>)"
+        class="row singleUser" style="background: white; margin-bottom:5px"
+        >
 			<?php if(!$me) { ?>
 				<div class="col-md-3 userAv">
 						<img width="50px" height="50px" id="image" src="app.php?action=profile_image&user=<?= $row['mykey'] ?>"/>
@@ -38,11 +38,11 @@ $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIME
 						<span class="name"><?= $row['name'] ?></span>
 					</div>
 					<div class="row">
-                                                <span class="user_key">
-                                                    <a href="app.php?action=profile&user=<?= $row['mykey'] ?>">
-                                                        (<?= $row['mykey'] ?>)
-                                                    </a>
-                                                </span>
+                        <span class="user_key">
+                            <a href="app.php?action=profile&user=<?= $row['mykey'] ?>">
+                            (<?= $row['mykey'] ?>)
+                            </a>
+                        </span>
 					</div>
 				</div>
 			<?php } ?>

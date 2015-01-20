@@ -3,6 +3,7 @@ body{
 	background: -o-linear-gradient(#5C5C3D, #1F5C1F);
 	background: -moz-linear-gradient(#5C5C3D, #1F5C1F);
 	background: linear-gradient(#5C5C3D, #1F5C1F);
+	text-align: center;
 }
 
 input{
@@ -11,7 +12,16 @@ input{
 	border: 2px solid #A3CCA3;
 	padding: 5px;
 	margin: 5px;
-	width: 300px;
+}
+
+textarea{
+	font-weight: normal;
+	color: #001400;
+	box-shadow: 5px 5px 250px #CCFFCC;
+	border: 2px solid #A3CCA3;
+	font-size: 80%;
+	width: 240px;
+	height: 100px;
 }
 
 ::-webkit-input-placeholder {
@@ -27,43 +37,15 @@ input{
     font-style: italic;
 }
 
-.btn-log {
-  background: -webkit-linear-gradient(#339933, #1F5C1F);
-  background: -o-linear-gradient(#339933, #1F5C1F);
-  background: -moz-linear-gradient(#339933, #1F5C1F);
-  background: linear-gradient(#339933, #1F5C1F);
-  float: right;
-  border-color: #ccc;
-  color: #EFFFDE;
-  font-weight: bold;
-  font-size: 80%;
-  width: 80px;
-}
-
-.checkB{
-	width: auto;
-}
-
-.sign{
-	font-size: 90%;
-}
-
-.go{
-	margin-left: auto;
-	margin-right: auto;
-	width: 300px;
-}
-
-.panel-login{
-	margin-top: 10%;
+.panel-parla{
 	border: 1px solid;
 	border-color: #1F5C1F;
 	box-shadow: 5px 5px 55px #000000;
 	margin-left: auto;
 	margin-right: auto;
-	width: 500px;
+	display: inline-block;
 }
-.panel-login > .panel-heading {
+.panel-parla > .panel-heading {
   color: #EFFFDE;
   font-size:large;
   font-weight: bold;
@@ -79,22 +61,6 @@ input{
   margin-bottom: 0;
   font-weight: bold;
   font-size: 24px;
+  text-align: left;
   }
-  
-  
-
-
-.frame {
-    border: 1px solid green;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-}
-.error {
-    color: red;
-    font-size: 70%;
-}
-thead {
-    background-color: #bfffbf;
-}
-
+ 
