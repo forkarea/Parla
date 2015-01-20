@@ -24,14 +24,6 @@
 	font-weight: bold;
 }
 
-body{
-	background: -webkit-linear-gradient(#5C5C3D, #1F5C1F);
-	background: -o-linear-gradient(#5C5C3D, #1F5C1F);
-	background: -moz-linear-gradient(#5C5C3D, #1F5C1F);
-	background: linear-gradient(#5C5C3D, #1F5C1F);
-	text-align: center;
-}
-
 .submit-btn{
 	height: 64px;
 	font-weight: bold;
@@ -54,30 +46,8 @@ body{
 	width: 350px;
 }
 
-.panel-settings{
-	border: 1px solid #1F5C1F;
-	box-shadow: 5px 5px 55px #000000;
-	margin-left: auto;
-	margin-right: auto;
-	display: inline-block;
+.panel-parla{
 	text-align: left;
 }
 
-.panel-settings > .panel-heading {
-  color: #EFFFDE;
-  font-size:large;
-  font-weight: bold;
-  background: -webkit-linear-gradient(#339933, #1F5C1F);
-  background: -o-linear-gradient(#339933, #1F5C1F);
-  background: -moz-linear-gradient(#339933, #1F5C1F);
-  background: linear-gradient(#339933, #1F5C1F);
-  border-color: #d6e9c6;
-  }
-  
-  .panel-title {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-weight: bold;
-  font-size: 24px;
-  }
-  
+

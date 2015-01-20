@@ -1,0 +1,43 @@
+input{
+	width: 300px;
+}
+
+.btn-log {
+  background: -webkit-linear-gradient(#339933, #1F5C1F);
+  background: -o-linear-gradient(#339933, #1F5C1F);
+  background: -moz-linear-gradient(#339933, #1F5C1F);
+  background: linear-gradient(#339933, #1F5C1F);
+  float: right;
+  border-color: #ccc;
+  color: #EFFFDE;
+  font-weight: bold;
+  font-size: 80%;
+  width: 80px;
+}
+
+.checkB{
+	width: auto;
+}
+
+.sign{
+	font-size: 90%;
+}
+
+.go{
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	text-align: left;
+}
+
+.frame {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.error {
+    color: red;
+    font-size: 70%;
+}
+

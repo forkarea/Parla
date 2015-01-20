@@ -7,12 +7,15 @@
 <?php startblock('javascripts') ?>
 <?php endblock() ?>
 <?php startblock('styles') ?>
+	<link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/base.css">
 <?php endblock() ?>
 </head>
-
 <body>
-<div class="logo">
-    <img width="200px" src="../src/Mondo/SocialNetworkBundle/Images/logo.png">
+<div class="panel logo-div">
+	<div class="logo">
+		<img width="100px" src="../src/Mondo/SocialNetworkBundle/Images/logo.png">
+	</div>
 </div>
 <?php startblock('content') ?>
 <?php endblock() ?>

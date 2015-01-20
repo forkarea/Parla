@@ -17,7 +17,8 @@ $key = Session::getSessionData('key');
 
 <?php startblock('styles') ?>
     <link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main2.css">
+    <link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/chat.css">
+	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main.css">
 <?php endblock() ?>
 <?php startblock('javascripts') ?>
     <script src="../components/jquery/jquery-1.11.1.min.js"></script>
@@ -31,15 +32,20 @@ $key = Session::getSessionData('key');
 <?php endblock() ?>
 
 <?php startblock('content') ?>
-
-<div class="container chatPanel">
+<div class="panel panel-parla">
+	<div class="panel-heading">
+		<h1 class="panel-title">
+		<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>
+		 Main page</h1>
+	</div>
+	<div class="panel-body chat-pnl">
 	<div class="row userRow">
                 <?php /* displaying profile image */ ?>
-		<div class="col-md-2 avatar">
-                        <img width="150px" height="150px" id="image" src="app.php?action=profile_image&user=<?= Session::getSessionData('key') ?>"/>
+		<div class="col-xs-2 avatar">
+            <img width="150px" height="150px" id="image" src="app.php?action=profile_image&user=<?= Session::getSessionData('key') ?>"/>
 		</div>
                 <?php /* photo upload */ ?>
-		<div class="col-md-4 avatarUpload">
+		<div class="col-xs-3 avatarUpload">
 			<form action="app.php?action=upload_photo" method="post" enctype="multipart/form-data" onsubmit="refresh_image()">
 				<span class="glyphicon glyphicon-picture" aria-hidden="true"></span><span class="uploadTxt"> Select image to upload:</span>
 				<input class="chooseAvatar" type="file" name="fileToUpload" id="fileToUpload">
@@ -48,37 +54,62 @@ $key = Session::getSessionData('key');
 			<span class="uploadInfo"><?= Session::session('info')  ?></span>
 		</div>
                 <?php /* user info */ ?>
-		<div class="col-md-3 userInfo">
-			<span class="glyphicon glyphicon-user infoTxt" aria-hidden="true"></span><span class="infoTxt"> Your name:</span> <?= Session::getSessionData('name') ?> <br/>
-			<span class="glyphicon glyphicon-wrench infoTxt" aria-hidden="true"></span><span class="infoTxt"> Your key:</span> <?= Session::getSessionData('key') ?> <br/>
-			<br><button class="btn btn-success passBtn" id="passwordButton" onclick="togglePassword()">Show password</button>
-			<div class="pass"><p id="password" style="display:none"> <?= Session::getSessionData('password') ?> </p></div>
+		<div class="col-xs-4 userInfo">
+			<div class="row">
+					<div class="col-xs-4">
+						<span class="glyphicon glyphicon-user infoTxt info-pad" aria-hidden="true"></span><span class="infoTxt"> Your name:</span>
+					</div>
+					<div class="col-xs-8">
+						<span class="name-info"><?= Session::getSessionData('name') ?></span>
+					</div>
+			</div>
+			<div class="row">
+					<div class="col-xs-4">
+						<span class="glyphicon glyphicon-hand-right infoTxt" aria-hidden="true"></span><span class="infoTxt"> Your key:</span>
+					</div>
+					<div class="col-xs-8">
+						<span class="key-info"><?= Session::getSessionData('key') ?></span>
+					</div>
+			</div>
+			</br>
+			<div class="row">
+					<div class="col-xs-4">
+						<button class="btn btn-success passBtn" id="passwordButton" onclick="togglePassword()">Show password</button>
+					</div>
+					<div class="col-xs-8">
+						<div class="pass"><p id="password" style="display:none"> <?= Session::getSessionData('password') ?> </p></div>
+					</div>
+			</div>
 			<?php
 				echo Session::getSessionData('errors'); 
 			?>
 		</div>
                 <?php /* logout */ ?>
-		<div class="col-md-2 logout">
+		<div class="col-xs-3 logout">
 			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span><a href="app.php?action=logout"> log out</a> <br/>
-                        <a href="app.php?action=account_settings">Account settings</a> <br/>
+                        <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span><a href="app.php?action=account_settings">account settings</a> <br/>
                         <a href="app.php?action=search">Search</a> <br/>
 		</div>
 	</div>
 	<div class="row chatRow">
                 <?php /* chat */ ?>
-		<div class="col-md-9">
-			<div class="chatTitle">
-				<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-				<span style="font-weight:bold">CHAT: </span>(add reciver)
+		<div class="col-xs-9">
+			<div class="chat-box">
+				<div class="chatTitle">
+					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+					<span style="font-weight:bold">CHAT: </span>(select reciver)
+				</div>
+				<div class="chatHistory" id='messages'></div>
+				<input class="chat" id='message'/>
+				<button class="btn btn-success sendBtn" onclick='send()'>send</button>
 			</div>
-			<div class="chatHistory" id='messages'></div>
-			<input class="chat" id='message'/>
-			<button class="btn btn-success sendBtn" onclick='send()'>send</button>
 		</div>
                 <?php /* user list */ ?>
-		<div class="col-md-3">
+		<div class="col-xs-3">
 			<div id='user_table'></div>
 		</div>
 	</div>
+</div>
+
 </div>
 <?php endblock() ?>

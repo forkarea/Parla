@@ -14,12 +14,13 @@ UserController::autoGo('home');
 
 <?php startblock('styles') ?>
 	<link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/home.css">
 	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main.css">
 <?php endblock() ?>
 
 
 <?php startblock('content') ?>
-<div class="panel panel-login">
+<div class="panel panel-parla">
 	<div class="panel-heading">
 		<h1 class="panel-title">
 		<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
@@ -27,15 +28,14 @@ UserController::autoGo('home');
 	</div>
 	<div class="panel-body">
 		<form action="app.php?action=go" method="post">
+			take advantage of the quick registration:
 			<div class="frame">
 				<input placeholder="Name" name="name"/>
 				<span class="error"><?= Session::getSessionData('errors_name') ?></span>
 			</div>
-			<div style="float:left">
-				Or
-			</div>
-			</br>
 			<div class="frame">
+				or log in if you already have account:
+				</br>
 				<input placeholder="Enter your username" name="key"/>
 				<br/>
 				<input placeholder="Enter your password" type="password" name="password"/>

@@ -13,9 +13,10 @@ $entity = new User($user);
 <?php startblock('styles') ?>
 	<link rel="stylesheet" href="../components/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/profile.css">
+	<link rel="stylesheet" type="text/css" href="../src/Mondo/SocialNetworkBundle/CSS/main.css">
 <?php endblock() ?>
 <?php startblock('content') ?>
-<div class="panel panel-settings">
+<div class="panel panel-parla">
 	<div class="panel-heading">
 		<h1 class="panel-title">
 		<span class="glyphicon glyphicon-user" aria-hidden="true"></span>

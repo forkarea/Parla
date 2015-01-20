@@ -4,19 +4,7 @@
 	height: 100px;
 }
 
-body{
-	background: -webkit-linear-gradient(#5C5C3D, #1F5C1F);
-	background: -o-linear-gradient(#5C5C3D, #1F5C1F);
-	background: -moz-linear-gradient(#5C5C3D, #1F5C1F);
-	background: linear-gradient(#5C5C3D, #1F5C1F);
-}
-
 input{
-	color: #001400;
-	box-shadow: 5px 5px 250px #CCFFCC;
-	border: 2px solid #A3CCA3;
-	padding: 5px;
-	margin: 5px;
 	width: 200px;
 	font-weight: normal;
 	font-size: 80%;
@@ -68,29 +56,6 @@ input{
 	text-align: center;
 }
 
-textarea{
-	font-weight: normal;
-	color: #001400;
-	box-shadow: 5px 5px 250px #CCFFCC;
-	border: 2px solid #A3CCA3;
-	font-size: 80%;
-	width: 240px;
-	height: 100px;
-}
-
-::-webkit-input-placeholder {
-    color: #A3CCA3;
-    font-style: italic;
-}
-:-moz-placeholder {
-    color: #A3CCA3;
-    font-style: italic;
-}
-:-ms-input-placeholder {
-    color: #A3CCA3;
-    font-style: italic;
-}
-
 .row-sett{
 	background: #E0FFC2;
 	margin-bottom: 5px;
@@ -124,36 +89,12 @@ textarea{
 	width: 850px;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	margin-left: auto;
-	margin-right: auto;
+	margin-left: 20px;
+	margin-right: 20px;
 	border: 2px solid #A3CCA3;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	text-align: left;
 }
 
-.panel-settings{
-	border: 1px solid #1F5C1F;
-	box-shadow: 5px 5px 55px #000000;
-	margin-left: auto;
-	margin-right: auto;
-	width: 900px;	
-}
-
-.panel-settings > .panel-heading {
-  color: #EFFFDE;
-  font-size:large;
-  font-weight: bold;
-  background: -webkit-linear-gradient(#339933, #1F5C1F);
-  background: -o-linear-gradient(#339933, #1F5C1F);
-  background: -moz-linear-gradient(#339933, #1F5C1F);
-  background: linear-gradient(#339933, #1F5C1F);
-  border-color: #d6e9c6;
-  }
-  
-  .panel-title {
-  margin-top: 0;
-  margin-bottom: 0;
-  font-weight: bold;
-  font-size: 24px;
-  }
   
