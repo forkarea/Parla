@@ -68,4 +68,5 @@ $actions = [
 
 if(!isset($_GET['action'])) $action = 'home';
 else $action = $_GET['action'];
+Mondo\SocialNetworkBundle\Controller\UserController::autoGo($action);
 $actions[$action]();

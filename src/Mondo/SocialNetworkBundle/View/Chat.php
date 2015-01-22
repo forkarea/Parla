@@ -6,9 +6,6 @@
  *
  ****************************************/
 use Mondo\UtilBundle\Core\Session;
-use Mondo\SocialNetworkBundle\Controller\UserController;
-
-UserController::autoGo('chat');
 
 $id = Session::getSessionData('id');
 $name = Session::getSessionData('name');

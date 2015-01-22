@@ -16,8 +16,8 @@ use Mondo\SocialNetworkBundle\Controller\MyCookie;
 class UserController {
     public static function autoGo($from) {
         MyCookie::read();
-        if($from!='home') if(Session::getSessionData('key') == "") header('Location: app.php');
         if($from=='home') if(Session::getSessionData('key') != "") header('Location: app.php?action=chat');
+        if($from!='home') if(Session::getSessionData('key') == "") header('Location: app.php');
     }
 
     private static function login($key, $password) {

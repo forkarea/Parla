@@ -6,9 +6,6 @@
  *
  ****************************************/
 use Mondo\UtilBundle\Core\Session;
-use Mondo\SocialNetworkBundle\Controller\UserController;
-
-UserController::autoGo('home');
 ?>
 <?php require_once '../components/arshaw/phpti/src/ti.php' ?>
 

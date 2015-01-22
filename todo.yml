@@ -5,7 +5,7 @@ Parla:
         message_alert: no
     backend:
         account_verification: no
-        account_settings: no
+        account_settings: yes
         chat:
             receiver:
                 single: yes
@@ -14,14 +14,17 @@ Parla:
         user_profile: yes
         user_search: no
         htaccess: no
-        login_length: no
+        login_length: yes
         captcha: no
         login_with_mail: no
+        automatic_account_delete:
+            delete: ['no', 'after 7 days']
+            alert: no
     project:
         server: no
         file_singature: no
     bugs:
-        user_table: no
+        user_table: yes
         'Not correct username or password - on chat': no
         go_redirect: no
         bootstrap: no

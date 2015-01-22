@@ -13,6 +13,10 @@ class User {
         $this->data = $data;
     }
 
+    public function getDefaultOrientation() {
+        return '';
+    }
+
     public function getGender() {
         $map = [
             'm' => 'male',
@@ -23,6 +27,7 @@ class User {
     }
 
     public function getOrientation() {
+        if(is_null($this->data['orientation'])) return $this->getDefaultOrientation();
         $map = [
             'hetero' => 'heterosexual',
             'homo' => 'homosexual',
