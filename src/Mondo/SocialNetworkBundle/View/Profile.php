@@ -48,7 +48,7 @@ $entity = new User($user);
 						City: 
 					</div>
 					<div class="col-xs-8">
-						<?= $user['city'] ?>
+						<?= $entity->get('city') ?>
 					</div>
 			</div>
 			<div class="row row-sett">
@@ -56,7 +56,7 @@ $entity = new User($user);
 						Country: 
 					</div>
 					<div class="col-xs-8">
-						<?= $user['country'] ?>
+						<?= $entity->get('country') ?>
 					</div>
 			</div>
 			<div class="row row-sett">
@@ -64,7 +64,7 @@ $entity = new User($user);
 						Gender: 
 					</div>
 					<div class="col-xs-8">
-						<?= $user['gender'] ?>
+						<?= $entity->get('gender') ?>
 					</div>
 			</div><div class="row row-sett">
 					<div class="col-xs-4 info-txt">
@@ -78,7 +78,7 @@ $entity = new User($user);
 						Orientation: 
 					</div>
 					<div class="col-xs-8">
-						<?= $user['orientation'] ?>
+						<?= $entity->get('orientation') ?>
 					</div>
 			</div>
 		</div>
