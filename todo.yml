@@ -20,6 +20,7 @@ Parla:
         automatic_account_delete:
             delete: ['no', 'after 7 days']
             alert: no
+        translations: no
     project:
         server: no
         file_singature: no

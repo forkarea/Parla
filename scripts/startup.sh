@@ -15,8 +15,8 @@ project=Parla
 domain=localhost
 uploadsDir=web/uploads
 smtp_server='smtp.gmail.com'
-smtp_user='parla.simple.mailer'
-smtp_pass='QMBfZjpRvPmjzQqIJkYD'
+smtp_user='parla.new.mailer'
+smtp_pass='QqNl133VxV6n9MaWJCiL'
 
 #sudo apt-get update &&
 toinst=(realpath curl git apache2 php5 php5-cli mysql-client mysql-server php5-mysql) &&
@@ -52,6 +52,7 @@ sudo mkdir -p /var/www/html/public/$path &&
 if [ -a /var/www/html/public/$path$project ]; then
     sudo rm /var/www/html/public/$path$project
 fi &&
-sudo ln -s `realpath .` /var/www/html/public/$path$project
+sudo ln -s `realpath .` /var/www/html/public/$path$project &&
+sudo scripts/createServer.sh &&
 sudo /etc/init.d/apache2 restart &&
 gnome-open http://$domain/public/$path$project/web/app.php

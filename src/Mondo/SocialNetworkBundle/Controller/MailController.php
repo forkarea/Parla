@@ -6,10 +6,15 @@
  ****************************************/
 
 require_once '../../../../vendor/swiftmailer/swiftmailer/lib/swift_required.php';
+require_once '../../../../app/parameters.php';
+require_once '../../UtilBundle/Core/DB.php';
+
+use Mondo\UtilBundle\Core\DB;
 
 class MailController {
     public static function verify($id) {
-        $email = DB::queryCell('SELECT mail FROM users WHERE id=%s', $id, 'mail');
+        $email = DB::queryCell('SELECT mail FROM users WHERE id=%s', [$id], 'mail');
+        //$email = 'uomodislesia@gmail.com';
         self::sendMail($email, 'account verification', 'blabla');
     }
 
@@ -17,9 +22,9 @@ class MailController {
         function __autoload($class_name) {
         }
 
-        $transport = \Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, "ssl")
-            ->setUsername('parla.simple.mailer')
-            ->setPassword('QMBfZjpRvPmjzQqIJkYD');
+        $transport = \Swift_SmtpTransport::newInstance(\Parameters::SMTP_SERVER, 465, "ssl")
+            ->setUsername(\Parameters::SMTP_USER)
+            ->setPassword(\Parameters::SMTP_PASSWORD);
 
         $mailer = \Swift_Mailer::newInstance($transport);
 
@@ -34,5 +39,5 @@ class MailController {
 }
 
 
-
-header('Location: ../../../../web/app.php?action=chat.php');
+MailController::verify($_GET['id']);
+header('Location: ../../../../web/app.php');

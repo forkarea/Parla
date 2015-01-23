@@ -34,8 +34,8 @@ class Parameters {
     const SMTP_SERVER = 'smtp.gmail.com';
 
     /** SMTP user */
-    const SMTP_USER = 'parla.simple.mailer';
+    const SMTP_USER = 'parla.new.mailer';
 
     /** SMTP password */
-    const SMTP_PASSWORD = 'QMBfZjpRvPmjzQqIJkYD';
+    const SMTP_PASSWORD = 'QqNl133VxV6n9MaWJCiL';
 }
