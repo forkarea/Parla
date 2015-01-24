@@ -18,6 +18,10 @@ class MailController {
         self::sendMail($email, 'account verification', 'blabla');
     }
 
+    private static function getMessage($user) {
+
+    }
+
     private static function sendMail($email, $subject, $msg) {
         function __autoload($class_name) {
         }
