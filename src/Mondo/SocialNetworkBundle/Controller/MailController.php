@@ -15,7 +15,10 @@ class MailController {
     public static function verify($id) {
         $email = DB::queryCell('SELECT mail FROM users WHERE id=%s', [$id], 'mail');
         //$email = 'uomodislesia@gmail.com';
-        self::sendMail($email, 'account verification', 'blabla');
+
+        $text = file_get_contents('http://'.\Parameters::DOMAIN_NAME.'/public/'.\Parameters::PATH.\Parameters::PROJECT_NAME.'/web/app.php?action=verif_text&id='.$id);
+        echo 'text='.$text;
+        //self::sendMail($email, 'account verification', $text);
     }
 
     private static function getMessage($user) {
@@ -44,4 +47,4 @@ class MailController {
 
 
 MailController::verify($_GET['id']);
-header('Location: ../../../../web/app.php');
+//header('Location: ../../../../web/app.php');

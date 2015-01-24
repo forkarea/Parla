@@ -192,4 +192,14 @@ class UserController {
         Session::toSession('password', $_POST['new']);
         header('Location: app.php?action=chat');
     }
+
+    public static function verify($id) {
+        header('Location: ../src/Mondo/SocialNetworkBundle/Controller/MailController.php?id='.$id);
+    }
+
+    public static function verifText($id) {
+        $code = Text::randStrAlpha(24);
+        DB::query('INSERT INTO verif_codes(user_id, code) VALUES("%s", password("%s"))', [$id, $code]);
+        header('Location: ../src/Mondo/SocialNetworkBundle/View/VerificationMail.php?code='.$code);
+    }
 }
