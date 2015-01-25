@@ -1,10 +1,13 @@
-<?php include 'Base.php' ?>
 <?php
 /****************************************
  *
- * Author: Piotr Sroczkowski
+ * Author: Piotr Sroczkowski, Paulina Ryfka
  *
  ****************************************/
+?>
+
+<?php include 'Base.php' ?>
+<?php
 use Mondo\UtilBundle\Core\Session;
 ?>
 <?php require_once '../components/arshaw/phpti/src/ti.php' ?>

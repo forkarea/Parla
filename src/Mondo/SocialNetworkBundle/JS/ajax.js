@@ -1,3 +1,9 @@
+/****************************************
+ *
+ * Author: Piotr Sroczkowski
+ *
+ ****************************************/
+
 setInterval( function() {
     $.get('app.php?action=user_table', function(data) {
         $('#user_table').html(data);

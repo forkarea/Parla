@@ -1,3 +1,11 @@
+<?php
+/****************************************
+ *
+ * Author: Piotr Sroczkowski, Paulina Ryfka
+ *
+ ****************************************/
+?>
+
 <?php require_once '../components/arshaw/phpti/src/ti.php' ?>
 <html>
 <head>

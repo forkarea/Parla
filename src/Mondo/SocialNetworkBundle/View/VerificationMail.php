@@ -1,9 +1,11 @@
 <?php
 /****************************************
  *
- * Author: Piotr Sroczkowski
+ * Author: Piotr Sroczkowski, Paulina Ryfka
  *
  ****************************************/
+?>
+<?php
 
 require_once '../../../../app/parameters.php';
 header('Content-Type: text/plain');
