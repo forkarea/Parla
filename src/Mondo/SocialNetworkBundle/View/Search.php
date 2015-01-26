@@ -19,6 +19,7 @@ use Mondo\SocialNetworkBundle\Entity\User;
 <?php endblock() ?>
 <?php startblock('content') ?>
 
-asdda
+City: <input name="city" />
+Country: <input name="country" />
 
 <?php endblock() ?>

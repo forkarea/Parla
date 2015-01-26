@@ -20,45 +20,35 @@ class UserController {
         if($from!='home') if(Session::getSessionData('key') == "") header('Location: app.php');
     }
 
-    private static function login($key, $password) {
-        $row = DB::queryRow('SELECT id,name,mykey FROM users WHERE (BINARY mykey="%1$s" OR BINARY mail="%1$s") AND PASSWORD("%2$s")=password LIMIT 1', [$key, $password]);
-
-        if($row) {
-            Session::toSession('id', $row['id']);
-            Session::toSession('name', $row['name']);
-            Session::toSession('key', $row['mykey']);
+    private static function univLogin($id, $name, $key, $password, $ok, $errMsg) {
+        if($ok) {
+            Session::toSession('id', $id);
+            Session::toSession('name', $name);
+            Session::toSession('key', $key);
             Session::toSession('password', $password);
             Session::toSession('errors', '');
             Session::toSession('errors_name', '');
-            return 'Chat.php';
+            file_put_contents('log.txt', "\n\nSuccessful login, username: ".$name.', key: '.$key.
+                ', time: '.(new \DateTime)->format('Y-m-d H:i:s'), FILE_APPEND);
         } else {
-            Session::toSession('errors', 'Incorrect username or password');
-            return 'Home.php';
+            foreach($errMsg as $errKey => $msg) {
+                Session::toSession($errKey, $msg);
+            }
+            file_put_contents('log.txt', "\n\nUnsuccessful login, username: ".$name.
+                ', time: '.(new \DateTime)->format('Y-m-d H:i:s'), FILE_APPEND);
         }
+    }
+
+    private static function login($key, $password) {
+        $row = DB::queryRow('SELECT id,name,mykey FROM users WHERE (BINARY mykey="%1$s" OR BINARY mail="%1$s") AND PASSWORD("%2$s")=password LIMIT 1', [$key, $password]);
+        self::univLogin($row['id'], $row ? $row['name'] : $key, $row['mykey'], $password, $row ? true : false, ['errors' => 'Incorrect username or password']);
     }
 
     private static function loginById($id) {
         file_put_contents('/home/pierre/log.txt', "\n\nloginById id=".$id, FILE_APPEND);
         $row = DB::queryRow("SELECT * FROM users WHERE BINARY id=%s limit 1", [$id]);
-        file_put_contents('/home/pierre/log.txt', "\n\nquery=".DB::getLastQuery(), FILE_APPEND);
-        
-
-        if($row) {
-            Session::toSession('id', $row['id']);
-            Session::toSession('name', $row['name']);
-            Session::toSession('key', $row['mykey']);
-            Session::toSession('password', $row['mail']);
-            Session::toSession('errors', '');
-            Session::toSession('errors_name', '');
-            file_put_contents('/home/pierre/log.txt', "\n\nkey=".Session::getSessionData('key'), FILE_APPEND);
-            echo 'assad';
-            return 'Chat.php';
-        } else {
-            Session::toSession('errors', 'Incorrect username or password');
-            return 'Home.php';
-        }
+        self::univLogin($row['id'], $row['name'], $row['mykey'], $row['mail'], $row ? true : false, ['errors' => 'Incorrect username or password']);
     }
-
 
     public static function logout() {
         Session::clearSession();
@@ -74,17 +64,7 @@ class UserController {
         DB::query("INSERT INTO users (name, mykey, password) VALUES ('%s', '%s', PASSWORD('%s'))", [$name, $key, $password]);
         $id = DB::queryCell("SELECT id FROM users WHERE BINARY mykey='%s'", [$key], 'id');
 
-        if(!self::validateName($name)) {
-            Session::clearSession();
-            Session::toSession('errors_name', 'Incorrect name');
-            return 'Home.php';
-        }
-        Session::toSession('id', $id);
-        Session::toSession('errors', '');
-        Session::toSession('name', $name);
-        Session::toSession('key', $key);
-        Session::toSession('password', $password);
-        return 'Chat.php';
+        self::univLogin($id, $name, $key, $password, self::validateName($name) ? true : false, ['errors_name' => 'Incorrect name']);
     }
 
     public static function go() {
@@ -100,7 +80,6 @@ class UserController {
             setcookie('password', Session::getSessionData('password'), time()+86400*30, '/');
         }
 
-        //include '../src/Mondo/SocialNetworkBundle/View/'.$loc;
         header('Location: app.php');
     }
 
@@ -168,6 +147,14 @@ class UserController {
 
     public static function accountUpdate() {
         $row = DB::queryRow('SELECT mail,verified FROM users WHERE id=%s', [$_GET['id']]);
+        if($row['mail']!=$_POST['email']) {
+            $count = DB::queryCell('SELECT COUNT(*) c FROM users WHERE mail="%s"', [$_POST['email']], 'c');
+            if($count>0) {
+                Session::toSession('errors_mail', 'another user has this email');
+                header('Location: app.php?action=account_settings');
+                return;
+            }
+        }
         if($row['mail']!=$_POST['email'] || !$row['verified']) if(!self::verify($_GET['id'], $_POST['email'])) {
             Session::toSession('errors_mail', 'incorrect email address');
             header('Location: app.php?action=account_settings');

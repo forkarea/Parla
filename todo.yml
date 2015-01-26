@@ -1,33 +1,39 @@
 Parla:
+    backend:
+        account_settings: yes
+        account_verification: yes
+        automatic_account_delete:
+            alert: no
+            delete: ['no', 'after 7 days']
+        captcha: no
+        chat:
+            info_about_writing: no
+            performance: no
+            receiver:
+                multiple: no
+                single: yes
+        counries_list: no
+        htaccess: no
+        login_length: yes
+        login_with_mail:
+            checking_if_exists: yes
+            login: yes
+        logs: yes
+        message_selection: no
+        password_reset: no
+        phpunit: yes
+        translations: no
+        user_profile: yes
+        user_search: no
+    bugs:
+        bootstrap: no
+        go_redirect: no
+        user_table: yes
+        'Not correct username or password - on chat': no
     frontend:
         better_background: no
         emoticons: no
         message_alert: no
-    backend:
-        account_verification: yes
-        account_settings: yes
-        chat:
-            receiver:
-                single: yes
-                multiple: no
-            performance: no
-        user_profile: yes
-        user_search: no
-        htaccess: no
-        login_length: yes
-        captcha: no
-        login_with_mail:
-            checking_if_exists: no
-            login: no
-        automatic_account_delete:
-            delete: ['no', 'after 7 days']
-            alert: no
-        translations: no
     project:
-        server: no
         file_singature: yes
-    bugs:
-        user_table: yes
-        'Not correct username or password - on chat': no
-        go_redirect: no
-        bootstrap: no
+        server: no
