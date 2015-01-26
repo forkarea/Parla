@@ -11,6 +11,7 @@ CREATE TABLE messages (
   sender int(11) DEFAULT NULL,
   receiver int(11) DEFAULT NULL,
   time datetime DEFAULT NULL,
+  just_read tinyint(1) DEFAULT 0,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

@@ -11,7 +11,7 @@ setInterval( function() {
 }, 2000);
 
 setInterval( function() {
-    $.get('app.php?action=messages&sender='+$id+'&receiver='+receiver, function(data) {
+    $.get('app.php?action=messages&sender='+$id+'&receiver='+receiver+'&last_id='+lastId, function(data) {
         $('#messages').html(data);
     });
 }, 2000);

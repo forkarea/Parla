@@ -9,10 +9,19 @@
 use Mondo\UtilBundle\Core\DB;
 use Mondo\UtilBundle\Core\Session;
 
+header('Content-type: application/json');
+
+
 $sender = $_GET['sender'];
 $receiver = $_GET['receiver'];
-$result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s)',
-    [3, $sender, $receiver]);
+$result = DB::query(
+    'SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
+    [3, $sender, $receiver, $_GET['last_id']]);
+DB::query(
+    'UPDATE messages SET read=1 WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
+    [3, $sender, $receiver, $_GET['last_id']]);
+
+ob_start();
 ?>
 
 <div width="300" height="500" style="background:#EDFFDC;">
@@ -55,4 +64,7 @@ $result = DB::query('SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF
     }
 ?>
 </div>
-
+<?php
+$out = ob_get_clean();
+echo json_encode(['html' => $out, 'lastId' => 2]);
+?>
