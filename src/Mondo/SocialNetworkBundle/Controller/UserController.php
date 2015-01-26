@@ -37,6 +37,29 @@ class UserController {
         }
     }
 
+    private static function loginById($id) {
+        file_put_contents('/home/pierre/log.txt', "\n\nloginById id=".$id, FILE_APPEND);
+        $row = DB::queryRow("SELECT * FROM users WHERE BINARY id=%s limit 1", [$id]);
+        file_put_contents('/home/pierre/log.txt', "\n\nquery=".DB::getLastQuery(), FILE_APPEND);
+        
+
+        if($row) {
+            Session::toSession('id', $row['id']);
+            Session::toSession('name', $row['name']);
+            Session::toSession('key', $row['mykey']);
+            Session::toSession('password', $row['mail']);
+            Session::toSession('errors', '');
+            Session::toSession('errors_name', '');
+            file_put_contents('/home/pierre/log.txt', "\n\nkey=".Session::getSessionData('key'), FILE_APPEND);
+            echo 'assad';
+            return 'Chat.php';
+        } else {
+            Session::toSession('errors', 'Incorrect username or password');
+            return 'Home.php';
+        }
+    }
+
+
     public static function logout() {
         Session::clearSession();
         setcookie('key', '', time()-86400*30, '/');
@@ -208,9 +231,12 @@ class UserController {
     }
 
     public static function verifyAfter($code) {
+        file_put_contents('/home/pierre/log.txt', "\n\nverAfter", FILE_APPEND);
         $id = DB::queryCell('SELECT user_id FROM verif_codes WHERE password("%s")=code', [$code], 'user_id');
         DB::query('UPDATE users SET verified=1 WHERE id=%s', [$id]);
-        DB::query('DELETE FROM verif_codes WHERE password("%s")=code', [$code]);
+        //DB::query('DELETE FROM verif_codes WHERE password("%s")=code', [$code]);
+        echo 'xxx';
+        self::loginById($id);
         header('Location: app.php');
     }
 }

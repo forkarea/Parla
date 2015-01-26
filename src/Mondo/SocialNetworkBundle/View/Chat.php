@@ -80,7 +80,7 @@ $key = Session::getSessionData('key');
 			</br>
 			<div class="row">
 					<div class="col-xs-4">
-						<button class="btn btn-success passBtn" id="passwordButton" onclick="togglePassword()">Show password</button>
+						<button class="btn btn-success passBtn" id="passwordButton" onclick="togglePassword()">Show password/email</button>
 					</div>
 					<div class="col-xs-8">
 						<div class="pass"><p id="password" style="display:none"> <?= Session::getSessionData('password') ?> </p></div>

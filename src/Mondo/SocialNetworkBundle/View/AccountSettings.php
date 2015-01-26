@@ -10,8 +10,10 @@
 <?php
 use Mondo\UtilBundle\Core\Session;
 use Mondo\UtilBundle\Core\DB;
+use Mondo\SocialNetworkBundle\Entity\User;
 
 $user = DB::queryRow('SELECT * FROM users WHERE id=%s LIMIT 1', [Session::getSessionData('id')]);
+$entity = new User($user);
 ?>
 <?php startblock('javascripts') ?>
 <?php endblock() ?>
@@ -37,7 +39,7 @@ $user = DB::queryRow('SELECT * FROM users WHERE id=%s LIMIT 1', [Session::getSes
 			</div>
 			<div class="col-xs-12">
 			<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-				<a href="app.php?action=verify&id=<?= $user['id'] ?>">Verify e-mail address</a> <br/>
+				<a href="app.php?action=verify&id=<?= $user['id'] ?>">Reset password</a> <br/>
 			</div>
 		</div>
 	</div>
@@ -60,6 +62,18 @@ $user = DB::queryRow('SELECT * FROM users WHERE id=%s LIMIT 1', [Session::getSes
 					</div>
 					<div class="col-xs-8">
                                             <input name="email" value="<?= $user['mail'] ?>" />
+					</div>
+				</div>
+				<div class="row row-sett">
+                                        (Verification e-mail will be sent if you have not verified your account yet or if you change your e-mail address.)
+				</div>
+				<div class="row row-sett">
+					<div class="col-xs-4">
+					        Verified: 
+                                                <?= Session::getSessionData('errors_mail') ?>
+					</div>
+					<div class="col-xs-8">
+                                            <span><?= $entity->getVerified() ?></span>
 					</div>
 				</div>
 				<div class="row row-sett">

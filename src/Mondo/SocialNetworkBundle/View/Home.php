@@ -36,7 +36,7 @@ use Mondo\UtilBundle\Core\Session;
 			<div class="frame">
 				or log in if you already have account:
 				</br>
-				<input placeholder="Enter your username" name="key"/>
+				<input placeholder="Enter your key or e-mail address" name="key"/>
 				<br/>
 				<input placeholder="Enter your password" type="password" name="password"/>
 				<br/>

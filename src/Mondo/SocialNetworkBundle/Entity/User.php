@@ -26,6 +26,14 @@ class User {
         return $map[$this->data['gender']];
     }
 
+    public function getVerified() {
+        $map = [
+            0 => 'no',
+            1 => 'yes',
+        ];
+        return $map[$this->data['verified']];
+    }
+
     public function getOrientation() {
         if(is_null($this->data['orientation'])) return $this->getDefaultOrientation();
         $map = [

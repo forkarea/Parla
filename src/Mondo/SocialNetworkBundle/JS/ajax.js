@@ -32,7 +32,7 @@ function refresh_image() {
 
 function togglePassword() {
     $('#password').toggle();
-    $('#passwordButton').html($('#passwordButton').html()[0]=='S' ? 'Hide password' : 'Show password');
+    $('#passwordButton').html($('#passwordButton').html()[0]=='S' ? 'Hide password/email' : 'Show password/email');
 }
 
 function userClick(id, key, name) {
