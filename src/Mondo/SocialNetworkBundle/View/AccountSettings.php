@@ -56,6 +56,7 @@ $user = DB::queryRow('SELECT * FROM users WHERE id=%s LIMIT 1', [Session::getSes
 				<div class="row row-sett">
 					<div class="col-xs-4">
 						E-mail address: 
+                                                <?= Session::getSessionData('errors_mail') ?>
 					</div>
 					<div class="col-xs-8">
                                             <input name="email" value="<?= $user['mail'] ?>" />

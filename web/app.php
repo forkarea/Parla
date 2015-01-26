@@ -60,12 +60,12 @@ $actions = [
     'verify' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::verify($_GET['id']);
     },
+    'verify_after' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::verifyAfter($_GET['code']);
+    },
     'search' => function() {
         include '../src/Mondo/SocialNetworkBundle/View/Search.php';
     },
-    'verif_text' => function() {
-        Mondo\SocialNetworkBundle\Controller\UserController::verifText($_GET['id']);
-    }
 ];
 
 if(!isset($_GET['action'])) $action = 'home';

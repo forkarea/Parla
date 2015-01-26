@@ -5,46 +5,59 @@
  *
  ****************************************/
 
-require_once '../../../../vendor/swiftmailer/swiftmailer/lib/swift_required.php';
-require_once '../../../../app/parameters.php';
-require_once '../../UtilBundle/Core/DB.php';
+require_once '../vendor/swiftmailer/swiftmailer/lib/swift_required.php';
+require_once '../app/parameters.php';
+require_once '../src/Mondo/UtilBundle/Core/DB.php';
 
 use Mondo\UtilBundle\Core\DB;
 
 class MailController {
-    public static function verify($id) {
-        $email = DB::queryCell('SELECT mail FROM users WHERE id=%s', [$id], 'mail');
-        //$email = 'uomodislesia@gmail.com';
-
-        $text = file_get_contents('http://'.\Parameters::DOMAIN_NAME.'/public/'.\Parameters::PATH.\Parameters::PROJECT_NAME.'/web/app.php?action=verif_text&id='.$id);
-        echo 'text='.$text;
-        //self::sendMail($email, 'account verification', $text);
+    public static function verify($email, $code) {
+        try {
+            $text = self::getMessage($code);
+            self::sendMail($email, 'account verification', $text);
+        } catch(\Exception $e) {
+            throw $e;
+        }
     }
 
-    private static function getMessage($user) {
+    private static function getMessage($code) {
+        $domain_name = \Parameters::DOMAIN_NAME;
+        $path = \Parameters::PATH;
+        $project_name = \Parameters::PROJECT_NAME;
+        return <<<DELIM
+Thank you for your registration, to complete your registration process, please open the following link:
+http://$domain_name/public/{$path}{$project_name}/web/app.php?action=verify_after&code=$code
 
+This email has been generated automatically, please do not respond.
+DELIM;
     }
 
     private static function sendMail($email, $subject, $msg) {
-        function __autoload($class_name) {
+        try {
+            $transport = \Swift_SmtpTransport::newInstance(\Parameters::SMTP_SERVER, 465, "ssl")
+                ->setUsername(\Parameters::SMTP_USER)
+                ->setPassword(\Parameters::SMTP_PASSWORD);
+
+            $mailer = \Swift_Mailer::newInstance($transport);
+
+            $message = \Swift_Message::newInstance($subject)
+                ->setFrom(array('ajax@chat.com' => 'chat'))
+                ->setTo(array($email))
+                ->setBody($msg);
+
+            $result = $mailer->send($message);
+            return $result;
+        } catch(\Exception $e) {
+            throw $e;
         }
-
-        $transport = \Swift_SmtpTransport::newInstance(\Parameters::SMTP_SERVER, 465, "ssl")
-            ->setUsername(\Parameters::SMTP_USER)
-            ->setPassword(\Parameters::SMTP_PASSWORD);
-
-        $mailer = \Swift_Mailer::newInstance($transport);
-
-        $message = \Swift_Message::newInstance($subject)
-            ->setFrom(array('ajax@chat.com' => 'chat'))
-            ->setTo(array($email))
-            ->setBody($msg);
-
-        $result = $mailer->send($message);
-        return $result;
     }
 }
 
 
-MailController::verify($_GET['id']);
-//header('Location: ../../../../web/app.php');
+try {
+    MailController::verify(urldecode($argv[1]), $argv[2]);
+    DB::query('INSERT INTO emails VALUES ("%s", 1) ON DUPLICATE KEY UPDATE is_correct=1', [urldecode($argv[1])]);
+} catch(\Exception $e) {
+    DB::query('INSERT INTO emails VALUES ("%s", 0) ON DUPLICATE KEY UPDATE is_correct=0', [urldecode($argv[1])]);
+}

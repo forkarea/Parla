@@ -42,6 +42,12 @@ CREATE TABLE verif_codes (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS emails;
+CREATE TABLE emails (
+  email varchar(255) DEFAULT NULL,
+  is_correct tinyint(1) DEFAULT 1,
+  PRIMARY KEY (email)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 DROP TRIGGER IF EXISTS modii;

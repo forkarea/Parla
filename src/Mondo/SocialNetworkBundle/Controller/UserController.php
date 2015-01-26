@@ -144,6 +144,11 @@ class UserController {
     }
 
     public static function accountUpdate() {
+        if(!self::verify($_GET['id'], $_POST['email'])) {
+            Session::toSession('errors_mail', 'incorrect email address');
+            header('Location: app.php?action=account_settings');
+            return;
+        }
         if(!self::validateBirth($_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'])) {
             Session::toSession('errors_birth', 'incorrect date of birth');
             header('Location: app.php?action=account_settings');
@@ -182,7 +187,6 @@ class UserController {
             return;
         }
         $isCorrect = DB::queryRow("SELECT password FROM users WHERE id=%s AND password=password('%s') LIMIT 1", [$_GET['id'], $_POST['current']], 'password');
-        var_dump($isCorrect);
         if(!$isCorrect) {
             Session::toSession('errors', 'incorrect password');
             header('Location: app.php?action=change_password');
@@ -190,16 +194,23 @@ class UserController {
         }
         DB::query("UPDATE users SET password=password('%s') WHERE id=%s LIMIT 1", [$_POST['new'], $_GET['id']]);
         Session::toSession('password', $_POST['new']);
-        header('Location: app.php?action=chat');
+        header('Location: app.php');
     }
 
-    public static function verify($id) {
-        header('Location: ../src/Mondo/SocialNetworkBundle/Controller/MailController.php?id='.$id);
-    }
-
-    public static function verifText($id) {
+    public static function verify($id, $email) {
         $code = Text::randStrAlpha(24);
         DB::query('INSERT INTO verif_codes(user_id, code) VALUES("%s", password("%s"))', [$id, $code]);
-        header('Location: ../src/Mondo/SocialNetworkBundle/View/VerificationMail.php?code='.$code);
+        //header('Location: ../src/Mondo/SocialNetworkBundle/Controller/MailController.php?email='.urlencode($email).'&code='.$code);
+        system(PHP_BINDIR.DIRECTORY_SEPARATOR.'php ..'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Mondo'.DIRECTORY_SEPARATOR.
+            'SocialNetworkBundle'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'MailController.php '.urlencode($email).' '.$code);
+        $is_correct = DB::queryCell('SELECT is_correct FROM emails WHERE email="%s"', [$email], 'is_correct');
+        return $is_correct;
+    }
+
+    public static function verifyAfter($code) {
+        $id = DB::queryCell('SELECT user_id FROM verif_codes WHERE password("%s")=code', [$code], 'user_id');
+        DB::query('UPDATE users SET verified=1 WHERE id=%s', [$id]);
+        DB::query('DELETE FROM verif_codes WHERE password("%s")=code', [$code]);
+        header('Location: app.php');
     }
 }
