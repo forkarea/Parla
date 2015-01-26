@@ -21,6 +21,7 @@ class DB {
         $lastQuery = vsprintf($sql,$ar);
         $result = $conn->query($lastQuery);
         self::$lastQuery = $lastQuery;
+        file_put_contents('log.txt', "\n\nquery: ".$lastQuery, FILE_APPEND);
         $conn->close();
         return $result;
     }

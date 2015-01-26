@@ -21,12 +21,12 @@ class UserController {
     }
 
     private static function login($key, $password) {
-        $row = DB::queryRow("SELECT * FROM users WHERE BINARY mykey='%s' and PASSWORD('%s')=password limit 1", [$key, $password]);
+        $row = DB::queryRow('SELECT id,name,mykey FROM users WHERE (BINARY mykey="%1$s" OR BINARY mail="%1$s") AND PASSWORD("%2$s")=password LIMIT 1', [$key, $password]);
 
         if($row) {
             Session::toSession('id', $row['id']);
             Session::toSession('name', $row['name']);
-            Session::toSession('key', $key);
+            Session::toSession('key', $row['mykey']);
             Session::toSession('password', $password);
             Session::toSession('errors', '');
             Session::toSession('errors_name', '');
@@ -90,7 +90,7 @@ class UserController {
     public static function go() {
         $key = $_POST['key'];
         $password = $_POST['password'];
-        $row = DB::queryRow("SELECT * FROM users WHERE BINARY mykey='%s' and PASSWORD('%s')=password limit 1", [$key, $password]);
+        $row = DB::queryRow('SELECT * FROM users WHERE (BINARY mykey="%1$s" OR BINARY mail="%1$s") AND PASSWORD("%2$s")=password LIMIT 1', [$key, $password]);
 
         if($_POST['key']!=='' || $_POST['password']!=='') $loc = self::login($_POST['key'], $_POST['password']);
         else $loc = self::createUser($_POST['name']);
@@ -167,7 +167,8 @@ class UserController {
     }
 
     public static function accountUpdate() {
-        if(!self::verify($_GET['id'], $_POST['email'])) {
+        $row = DB::queryRow('SELECT mail,verified FROM users WHERE id=%s', [$_GET['id']]);
+        if($row['mail']!=$_POST['email'] || !$row['verified']) if(!self::verify($_GET['id'], $_POST['email'])) {
             Session::toSession('errors_mail', 'incorrect email address');
             header('Location: app.php?action=account_settings');
             return;
@@ -182,7 +183,8 @@ class UserController {
             header('Location: app.php?action=account_settings');
             return;
         }
-        DB::query("UPDATE users SET mail='%s', name='%s', city='%s', country='%s', birth='%s', gender='%s', orientation='%s', about='%s' WHERE id=%s LIMIT 1",
+        $verified = $row['mail']==$_POST['email'] && $row['verified'] ? 1 : 0;
+        DB::query("UPDATE users SET mail='%s', name='%s', city='%s', country='%s', birth='%s', gender='%s', orientation='%s', about='%s', verified=%s WHERE id=%s LIMIT 1",
             [
                 $_POST['email'],
                 $_POST['name'],
@@ -192,10 +194,11 @@ class UserController {
                 $_POST['gender'],
                 $_POST['orientation'],
                 $_POST['about'],
+                $verified,
                 $_GET['id']
                 ]);
         Session::toSession('name', $_POST['name']);
-        header('Location: app.php?action=chat');
+        header('Location: app.php');
     }
 
     public static function updatePassword() {
@@ -228,6 +231,16 @@ class UserController {
             'SocialNetworkBundle'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'MailController.php '.urlencode($email).' '.$code);
         $is_correct = DB::queryCell('SELECT is_correct FROM emails WHERE email="%s"', [$email], 'is_correct');
         return $is_correct;
+    }
+
+    public static function verifyById($id) {
+        $email = DB::query('SELECT mail FROM users WHERE id=%s LIMIT 1', [$id]);
+        return self::verify($id, $email);
+    }
+
+    public static function resetPassword($id) {
+        $email = DB::query('SELECT mail FROM users WHERE id=%s LIMIT 1', [$id]);
+        return self::verifyById($id);
     }
 
     public static function verifyAfter($code) {

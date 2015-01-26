@@ -63,6 +63,9 @@ $actions = [
     'verify_after' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::verifyAfter($_GET['code']);
     },
+    'reset_password' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::resetPassword($_GET['code']);
+    },
     'search' => function() {
         include '../src/Mondo/SocialNetworkBundle/View/Search.php';
     },

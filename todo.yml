@@ -4,7 +4,7 @@ Parla:
         emoticons: no
         message_alert: no
     backend:
-        account_verification: no
+        account_verification: yes
         account_settings: yes
         chat:
             receiver:
@@ -16,14 +16,16 @@ Parla:
         htaccess: no
         login_length: yes
         captcha: no
-        login_with_mail: no
+        login_with_mail:
+            checking_if_exists: no
+            login: no
         automatic_account_delete:
             delete: ['no', 'after 7 days']
             alert: no
         translations: no
     project:
         server: no
-        file_singature: no
+        file_singature: yes
     bugs:
         user_table: yes
         'Not correct username or password - on chat': no
