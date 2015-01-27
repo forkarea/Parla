@@ -3,6 +3,7 @@
  * Author: Piotr Sroczkowski
  *
  ****************************************/
+var lastId = 0;
 
 setInterval( function() {
     $.get('app.php?action=user_table', function(data) {
@@ -11,9 +12,14 @@ setInterval( function() {
 }, 2000);
 
 setInterval( function() {
-    $.get('app.php?action=messages&sender='+$id+'&receiver='+receiver+'&last_id='+lastId, function(data) {
-        $('#messages').html(data);
+    url = 'app.php?action=messages&sender='+$id+'&receiver='+receiver+'&last_id='+lastId;
+    $.get(url, function(data) {
+        $('#messages').append(data['html']);
+        if(data['lastId']!=undefined) lastId = data['lastId'];
     });
+    console.log('inter');
+    console.log('lastId='+lastId);
+    console.log('url='+url);
 }, 2000);
 
 setInterval( function() {

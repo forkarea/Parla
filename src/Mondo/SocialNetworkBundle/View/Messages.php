@@ -14,12 +14,14 @@ header('Content-type: application/json');
 
 $sender = $_GET['sender'];
 $receiver = $_GET['receiver'];
+$lastId = 0;
+if(is_numeric($_GET['last_id'])) $lastId = $_GET['last_id'];
 $result = DB::query(
-    'SELECT text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
-    [3, $sender, $receiver, $_GET['last_id']]);
+    'SELECT id, text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
+    [3, $sender, $receiver, $lastId]);
 DB::query(
     'UPDATE messages SET read=1 WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
-    [3, $sender, $receiver, $_GET['last_id']]);
+    [3, $sender, $receiver, $lastId]);
 
 ob_start();
 ?>
@@ -33,6 +35,7 @@ ob_start();
 			<!-- wyswietlenie avataru-->
 			<div class="col-md-1">
 				<?php
+                                        $lastId = $row['id'];
 					$user = DB::queryRow("SELECT name, mykey FROM users WHERE id='%s'", [$row['sender']]);
 					$key = $user['mykey'];
 				?>
@@ -66,5 +69,6 @@ ob_start();
 </div>
 <?php
 $out = ob_get_clean();
-echo json_encode(['html' => $out, 'lastId' => 2]);
+echo json_encode(['html' => $out, 'lastId' => $lastId]);
+file_put_contents('/home/pierre/log.txt', "\n\nlastId=".$lastId.' client_lastId='.$_GET['last_id'], FILE_APPEND);
 ?>

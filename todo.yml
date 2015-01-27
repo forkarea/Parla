@@ -14,6 +14,8 @@ Parla:
                 single: yes
         counries_list: no
         htaccess: no
+        key:
+            checking_if_exists: no
         login_length: yes
         login_with_mail:
             checking_if_exists: yes
