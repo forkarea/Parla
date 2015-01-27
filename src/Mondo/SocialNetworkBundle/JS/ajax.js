@@ -4,6 +4,7 @@
  *
  ****************************************/
 var lastId = 0;
+var MAX_INT = Math.pow(2,20);
 
 setInterval( function() {
     $.get('app.php?action=user_table', function(data) {
@@ -14,13 +15,15 @@ setInterval( function() {
 setInterval( function() {
     url = 'app.php?action=messages&sender='+$id+'&receiver='+receiver+'&last_id='+lastId;
     $.get(url, function(data) {
-        $('#messages').append(data['html']);
+        var mes = $('#messages');
+        mes.append(data['html']);
+        mes.scrollTop(MAX_INT);
         if(data['lastId']!=undefined) lastId = data['lastId'];
     });
     console.log('inter');
     console.log('lastId='+lastId);
     console.log('url='+url);
-}, 2000);
+}, 500);
 
 setInterval( function() {
     $.post('app.php?action=notify', {sender: $id});
@@ -43,6 +46,8 @@ function togglePassword() {
 
 function userClick(id, key, name) {
     receiver = id;
+    lastId = 0;
+    $('#messages').html('');
     $('#chat_partner').html(''+key+', '+name);
     $('#user-'+key).css('background-color', 'red');
 }

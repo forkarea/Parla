@@ -12,6 +12,14 @@
 	margin-top: 10px;
 }
 
+.myMessage{
+    background-color: #ffd0d0;
+}
+
+.notMyMessage{
+    background-color: #d0d0ff;
+}
+
 .chatTitle{
 	background: #197519;
 	border-top: 3px solid #D5E6C6;

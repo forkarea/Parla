@@ -8,10 +8,11 @@ Parla:
         captcha: no
         chat:
             info_about_writing: no
-            performance: no
+            performance: yes
             receiver:
                 multiple: no
                 single: yes
+        unified_comments: no
         counries_list: no
         htaccess: no
         key:

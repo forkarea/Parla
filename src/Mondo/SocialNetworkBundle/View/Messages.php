@@ -20,7 +20,7 @@ $result = DB::query(
     'SELECT id, text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
     [3, $sender, $receiver, $lastId]);
 DB::query(
-    'UPDATE messages SET read=1 WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
+    'UPDATE messages SET just_read=1 WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND sender=%3$s AND receiver=%2$s AND id>%4$s',
     [3, $sender, $receiver, $lastId]);
 
 ob_start();
@@ -31,18 +31,18 @@ ob_start();
     while($row = $result->fetch_assoc()) {
 ?>
     <div class="container" style="background: white; margin-bottom:5px; width:800px">
-		<div class="row message">
+                <?php
+                        $lastId = $row['id'];
+                        $user = DB::queryRow("SELECT name, mykey FROM users WHERE id='%s'", [$row['sender']]);
+                        $key = $user['mykey'];
+                ?>
+		<div class="row message <?= $row['sender']==$sender ? 'myMessage' : 'notMyMessage' ?>">
 			<!-- wyswietlenie avataru-->
 			<div class="col-md-1">
-				<?php
-                                        $lastId = $row['id'];
-					$user = DB::queryRow("SELECT name, mykey FROM users WHERE id='%s'", [$row['sender']]);
-					$key = $user['mykey'];
-				?>
 					<img class="imgCol" width="50px" height="50px" id="image" src="app.php?action=profile_image&user=<?= $user['mykey'] ?>"/>
 			</div>
 			<!-- info o dacie i nadacy-->
-			<div class="col-md-2 messageInfo">
+                        <div class="col-md-2 messageInfo">
 				<div class="row">
 					<span class="dateTime"><?= $row['time'] ?></span>
 				</div>
