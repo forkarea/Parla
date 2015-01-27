@@ -8,6 +8,7 @@ Parla:
         captcha: no
         chat:
             info_about_writing: no
+            info_about_read: no
             performance: yes
             receiver:
                 multiple: no
@@ -22,6 +23,7 @@ Parla:
             checking_if_exists: yes
             login: yes
         logs: yes
+        mail_independent_from_data: no
         message_selection: no
         password_reset: no
         phpunit: yes
@@ -35,6 +37,7 @@ Parla:
         'Not correct username or password - on chat': no
     frontend:
         better_background: no
+        cancel: no
         emoticons: no
         message_alert: no
     project:

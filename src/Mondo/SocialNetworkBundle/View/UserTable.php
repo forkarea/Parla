@@ -15,7 +15,7 @@ use Mondo\UtilBundle\Core\DB;
 use Mondo\UtilBundle\Core\Session;
 
 if(Session::getSessionData('key') == "") header('Location: view1.php');
-$name = Session::getSessionData('name');
+$myId = Session::getSessionData('id');
 $key = Session::getSessionData('key');
 $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIMESTAMPDIFF(SECOND, last_notified, now()) < %s ORDER BY name", [9]);
 ?>
@@ -31,6 +31,7 @@ $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIME
 		<?php  if($result) if($result->num_rows > 0)
 			while($row = $result->fetch_assoc()) {
 			$me = $row['mykey']==$key;
+                        $amount_of_unread = DB::queryCell('SELECT count(*) c FROM messages WHERE sender=%s AND receiver=%s AND just_read=0', [$row['id'], $myId], 'c');
 		?>
                     <?php if(!$me) { ?>
                     <div 
@@ -51,6 +52,9 @@ $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIME
                                                     </a>
                                                 </span>
 					</div>
+                                    <div>
+                                        <?= $amount_of_unread>0 ? $amount_of_unread : '' ?>
+                                    </div>
 				</div>
                     </div>
                 <?php } ?>
