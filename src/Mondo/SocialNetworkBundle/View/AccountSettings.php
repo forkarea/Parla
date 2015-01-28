@@ -109,10 +109,10 @@ $entity = new User($user);
                                                 <?= Session::getSessionData('errors_birth') ?>
                                         </div>
                                         <div class="col-xs-8">
-                                        <?php $birth = new \DateTime($user['birth']) ?>
-                                        <input placeholder="dd" class="dateInput" name="day" value="<?= $birth->format('d') ?>" />
-                                                <input placeholder="mm" class="dateInput" name="month" value="<?= $birth->format('m') ?>"  />
-                                                <input placeholder="yyyy" class="yearInput" name="year" value="<?= $birth->format('Y') ?>"  />
+											<?php $birth = new \DateTime($user['birth']) ?>
+											<input placeholder="dd" class="dateInput" name="day" value="<?= $birth->format('d') ?>" />
+                                            <input placeholder="mm" class="dateInput" name="month" value="<?= $birth->format('m') ?>"  />
+                                            <input placeholder="yyyy" class="yearInput" name="year" value="<?= $birth->format('Y') ?>"  />
                                         </div>
                                 </div>
                                 <div class="row row-sett">
@@ -153,11 +153,11 @@ $entity = new User($user);
                                                 <input class="btn btn-success submit-btn" type="submit" value="SUBMIT"/>
                                         </div>
                                 </div>
-				<div class="row row-sett">
-					<div class="col-xs-14">
-						<input onclick="window.location.href='app.php'" class="btn btn-success submit-btn" type="button" value="CANCEL"/>
-					</div>
-				</div>
+								<div class="row row-sett">
+									<div class="col-xs-12">
+										<input onclick="window.location.href='app.php'" class="btn btn-success submit-btn" type="button" value="CANCEL"/>
+									</div>
+								</div>
                         </div>
                         </form>
                 </div>

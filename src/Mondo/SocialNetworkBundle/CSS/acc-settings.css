@@ -19,10 +19,7 @@ input{
 .submit-btn{
 	height: 64px;
 	font-weight: bold;
-	border-top-left-radius: 0px;
-	border-top-right-radius: 0px;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
+	border-radius: 0px;
 	width: 396px;
 	margin-left: -15px;
 	margin-top: 0px;

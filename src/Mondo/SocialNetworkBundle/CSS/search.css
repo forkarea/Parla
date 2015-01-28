@@ -1,0 +1,47 @@
+/****************************************
+ *
+ * Author: Paulina Ryfka
+ *
+ ****************************************/
+
+.border{
+	border: 1px solid red;
+}
+
+.age{
+	padding-left: 20px;
+}
+
+.txt{
+	font-size: 80%;
+}
+
+.search{
+	width: 410px;
+	margin: 10px;
+	border: 2px solid #A3CCA3;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	text-align: left;
+}
+
+.row-sett{
+	background: #E0FFC2;
+	margin: 5px;
+}
+
+.search-btn{
+	width: 176px;
+	border-radius: 0px;
+	font-weight: bold;
+}
+
+.selects{
+	padding: 3px;
+	margin: 5px;
+	font-size: 80%;
+}
+
+input{
+	width: 230px;
+}
