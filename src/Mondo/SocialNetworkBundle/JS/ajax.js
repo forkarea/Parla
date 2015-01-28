@@ -20,15 +20,25 @@ setInterval( function() {
         mes.scrollTop(MAX_INT);
         if(data['lastId']!=undefined) lastId = data['lastId'];
     });
-    console.log('inter');
-    console.log('lastId='+lastId);
-    console.log('url='+url);
 }, 500);
+
+setInterval( function() {
+        if(receiver!=null) {
+            var url = 'app.php?action=ajax_query&query='+encodeURIComponent(
+                    'SELECT count(*) c FROM writing_info WHERE sender=:sender AND receiver=:receiver AND TIMESTAMPDIFF(SECOND, last_notified, now()) < :time'
+                    )+'&args='+encodeURIComponent(JSON.stringify({sender: receiver, receiver: $id, time: 3}));
+            $.get(url, function(data) {
+                console.log('data='+JSON.stringify(data));
+                var is_writing = data[0]['c']==1;
+                $('#writing_info').html(is_writing ? 'is writing' : 'no');
+            });
+            console.log('url='+url);
+        }
+}, 1000);
 
 setInterval( function() {
     $.post('app.php?action=notify', {sender: $id});
 }, 2000);
-
 
 function send() {
     $.post('app.php?action=send', {sender: $id, receiver: receiver, message: $('#message').val()});
@@ -55,5 +65,13 @@ function userClick(id, key, name) {
 $(document).ready( function() {
     $('#message').keypress(function(e) {
         if(e.which == 13) send();
+        if(receiver!=null) {
+            var url = 'app.php?action=ajax_query&query='+encodeURIComponent(
+                    'insert into writing_info(sender, receiver, last_notified) values(:sender, :receiver, now()) ON DUPLICATE KEY UPDATE last_notified=now()'
+                    )+'&args='+encodeURIComponent(JSON.stringify({sender: $id, receiver: receiver}));
+            $.get(url, function(data) {
+            });
+            console.log('url='+url);
+        }
     });
 });

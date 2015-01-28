@@ -37,4 +37,14 @@ class DB {
     public static function getLastQuery() {
         return self::$lastQuery;
     }
+
+    public static function ajaxQuery($query, $args) {
+        foreach($args as $argskey => $argsval) $query = preg_replace('/:'.$argskey.'/', $argsval, $query);
+        $result = self::query($query);
+        header('Content-type: application/json');
+        if(!is_object($result)) return;
+        $output = [];
+        while($row = $result->fetch_assoc()) $output[] = $row;
+        echo json_encode($output);
+    }
 }

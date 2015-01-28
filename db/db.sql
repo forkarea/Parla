@@ -50,6 +50,16 @@ CREATE TABLE emails (
   PRIMARY KEY (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS writing_info;
+CREATE TABLE writing_info (
+  sender int(11) DEFAULT NULL,
+  receiver int(11) DEFAULT NULL,
+  last_notified timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (sender, receiver),
+  FOREIGN KEY (sender) REFERENCES users(id),
+  FOREIGN KEY (receiver) REFERENCES users(id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 DROP TRIGGER IF EXISTS modii;
 DELIMITER DELIM

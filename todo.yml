@@ -2,6 +2,7 @@ Parla:
     backend:
         account_settings: yes
         account_verification: yes
+        ajax_security: no
         automatic_account_delete:
             alert: no
             delete: ['no', 'after 7 days']
@@ -23,6 +24,7 @@ Parla:
             checking_if_exists: yes
             login: yes
         logs: yes
+        logs_delete: no
         mail_independent_from_data: no
         message_selection: no
         password_reset: no
@@ -39,7 +41,9 @@ Parla:
         better_background: no
         cancel: no
         emoticons: no
-        message_alert: no
+        message_alert:
+            view: yes
+            sound: no
     project:
         file_singature: yes
         server: no

@@ -70,5 +70,4 @@ ob_start();
 <?php
 $out = ob_get_clean();
 echo json_encode(['html' => $out, 'lastId' => $lastId]);
-file_put_contents('/home/pierre/log.txt', "\n\nlastId=".$lastId.' client_lastId='.$_GET['last_id'], FILE_APPEND);
 ?>

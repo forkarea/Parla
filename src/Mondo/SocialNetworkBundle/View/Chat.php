@@ -114,6 +114,7 @@ $key = Session::getSessionData('key');
 		<div class="col-xs-3">
 			<div id='user_table'></div>
 		</div>
+                <div class="col-xs-5" id="writing_info"></div>
 	</div>
 </div>
 

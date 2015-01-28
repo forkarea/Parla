@@ -69,6 +69,9 @@ $actions = [
     'search' => function() {
         include '../src/Mondo/SocialNetworkBundle/View/Search.php';
     },
+    'ajax_query' => function() {
+        Mondo\UtilBundle\Core\DB::ajaxQuery(urldecode($_GET['query']), json_decode(urldecode($_GET['args']), true));
+    }
 ];
 
 if(!isset($_GET['action'])) $action = 'home';
