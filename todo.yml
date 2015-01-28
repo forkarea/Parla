@@ -14,7 +14,9 @@ Parla:
             receiver:
                 multiple: no
                 single: yes
-        counries_list: no
+        countries_list: no
+        db_security: no
+        geo_info: no
         htaccess: no
         key:
             checking_if_exists: no
