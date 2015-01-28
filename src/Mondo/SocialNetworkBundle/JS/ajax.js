@@ -51,7 +51,7 @@ function refresh_image() {
 
 function togglePassword() {
     $('#password').toggle();
-    $('#passwordButton').html($('#passwordButton').html()[0]=='S' ? 'Hide password/email' : 'Show password/email');
+    $('#passwordButton').html($('#passwordButton').html()[0]=='S' ? 'Hide password' : 'Show password');
 }
 
 function userClick(id, key, name) {

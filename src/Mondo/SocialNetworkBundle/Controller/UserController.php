@@ -20,12 +20,13 @@ class UserController {
         if($from!='home') if(Session::getSessionData('key') == "") header('Location: app.php');
     }
 
-    private static function univLogin($id, $name, $key, $password, $ok, $errMsg) {
+    private static function univLogin($id, $name, $key, $password, $verified, $ok, $errMsg) {
         if($ok) {
             Session::toSession('id', $id);
             Session::toSession('name', $name);
             Session::toSession('key', $key);
             Session::toSession('password', $password);
+            Session::toSession('verified', $verified);
             Session::toSession('errors', '');
             Session::toSession('errors_name', '');
             file_put_contents('log.txt', "\n\nSuccessful login, username: ".$name.', key: '.$key.
@@ -40,14 +41,16 @@ class UserController {
     }
 
     private static function login($key, $password) {
-        $row = DB::queryRow('SELECT id,name,mykey FROM users WHERE (BINARY mykey="%1$s" OR BINARY mail="%1$s") AND PASSWORD("%2$s")=password LIMIT 1', [$key, $password]);
-        self::univLogin($row['id'], $row ? $row['name'] : $key, $row['mykey'], $password, $row ? true : false, ['errors' => 'Incorrect username or password']);
+        $row = DB::queryRow(
+            'SELECT id,name,mykey,verified FROM users WHERE (BINARY mykey="%1$s" OR BINARY mail="%1$s") AND PASSWORD("%2$s")=password LIMIT 1', [$key, $password]);
+        self::univLogin($row['id'], $row ? $row['name'] : $key, $row['mykey'], $password, $row['verified']==1, $row ? true : false,
+            ['errors' => 'Incorrect username or password']);
     }
 
     private static function loginById($id) {
         file_put_contents('/home/pierre/log.txt', "\n\nloginById id=".$id, FILE_APPEND);
         $row = DB::queryRow("SELECT * FROM users WHERE BINARY id=%s limit 1", [$id]);
-        self::univLogin($row['id'], $row['name'], $row['mykey'], $row['mail'], $row ? true : false, ['errors' => 'Incorrect username or password']);
+        self::univLogin($row['id'], $row['name'], $row['mykey'], '', $row['verified']==1, $row ? true : false, ['errors' => 'Incorrect username or password']);
     }
 
     public static function logout() {
@@ -64,7 +67,7 @@ class UserController {
         DB::query("INSERT INTO users (name, mykey, password) VALUES ('%s', '%s', PASSWORD('%s'))", [$name, $key, $password]);
         $id = DB::queryCell("SELECT id FROM users WHERE BINARY mykey='%s'", [$key], 'id');
 
-        self::univLogin($id, $name, $key, $password, self::validateName($name) ? true : false, ['errors_name' => 'Incorrect name']);
+        self::univLogin($id, $name, $key, $password, false, self::validateName($name) ? true : false, ['errors_name' => 'Incorrect name']);
     }
 
     public static function go() {
