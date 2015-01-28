@@ -55,6 +55,11 @@ use Mondo\UtilBundle\Core\Session;
 						<input class="btn btn-success submit-btn" type="submit" value="SUBMIT"/>
 					</div>
 			</div>
+			<div class="row row-sett new-row">
+					<div class="col-xs-12">
+						<input onclick="window.location.href='app.php'" class="btn btn-success submit-btn" type="button" value="CANCEL"/>
+					</div>
+			</div>
 		</form>
 	</div>
 </div>

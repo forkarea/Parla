@@ -8,13 +8,12 @@ Parla:
             delete: ['no', 'after 7 days']
         captcha: no
         chat:
-            info_about_writing: no
-            info_about_read: no
+            info_about_writing: yes
+            info_about_read: yes
             performance: yes
             receiver:
                 multiple: no
                 single: yes
-        unified_comments: no
         counries_list: no
         htaccess: no
         key:
@@ -47,3 +46,4 @@ Parla:
     project:
         file_singature: yes
         server: no
+        unified_comments: no
