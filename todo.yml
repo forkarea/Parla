@@ -14,10 +14,12 @@ Parla:
             receiver:
                 multiple: no
                 single: yes
-        countries_list: no
+        data_fixtures: no
         db_security: no
         geo_info: no
-        htaccess: no
+        htaccess:
+            security: no
+            default_site: no
         key:
             checking_if_exists: no
         login_length: yes
@@ -28,11 +30,12 @@ Parla:
         logs_delete: no
         mail_independent_from_data: no
         message_selection: no
+        message_to_non_online_users: no
         password_reset: no
         phpunit: yes
         translations: no
         user_profile: yes
-        user_search: no
+        user_search: yes
     bugs:
         bootstrap: no
         go_redirect: no

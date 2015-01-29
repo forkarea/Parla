@@ -4,6 +4,14 @@
  *
  ****************************************/
 
+.search_single_result {
+	border: 2px solid #A3CCA3;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	text-align: center;
+        margin: 10px;
+}
+
 .border{
 	border: 1px solid red;
 }

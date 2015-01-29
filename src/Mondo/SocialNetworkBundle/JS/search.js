@@ -33,6 +33,8 @@ function search() {
 function display(data) {
     $('#results').html('');
     for(var i in data) {
-        $('#results').append('<div><img width="200" src="uploads/'+data[i].mykey+'"/><br/>'+data[i].name+'<br/>'+data[i].mykey+'</div>');
+        $('#results').append('<a href="app.php?action=profile&user='+data[i].mykey+
+                '"><div class="search_single_result"><img width="200" src="app.php?action=profile_image&user='
+                +data[i].mykey+'"/><br/>'+data[i].name+'<br/>'+data[i].mykey+'</div></a>');
     }
 }
