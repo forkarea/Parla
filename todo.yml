@@ -48,6 +48,7 @@ Parla:
         message_alert:
             view: yes
             sound: no
+        pagination: no
     project:
         file_singature: yes
         server: no

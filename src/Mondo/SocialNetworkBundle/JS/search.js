@@ -1,3 +1,8 @@
+var pageNr = 0;
+var pageMax = 5;
+var onOnePage = 5;
+var searchData = [];
+
 function search() {
     var city = $('#city').val();
     var country = $('#country').val();
@@ -31,10 +36,50 @@ function search() {
 }
 
 function display(data) {
+    searchData = data;
+    pageMax = Math.floor(data.length/onOnePage)+1;
+    pageNr = 0;
+    displayPage();
+}
+
+function displayPage(data) {
+    console.log('onOnePage='+onOnePage+' nr='+pageNr);
+    $('#paginator').val(pageNr+1);
     $('#results').html('');
-    for(var i in data) {
-        $('#results').append('<a href="app.php?action=profile&user='+data[i].mykey+
+    for(var i=onOnePage*pageNr; i<onOnePage*(pageNr+1); i++) {
+        if(i>=searchData.length) break;
+        $('#results').append('<a href="app.php?action=profile&user='+searchData[i].mykey+
                 '"><div class="search_single_result"><img width="200" src="app.php?action=profile_image&user='
-                +data[i].mykey+'"/><br/>'+data[i].name+'<br/>'+data[i].mykey+'</div></a>');
+                +searchData[i].mykey+'"/><br/>'+searchData[i].name+'<br/>'+searchData[i].mykey+'</div></a>');
     }
 }
+
+function page(nr) {
+    var go = true;
+    if(nr!=undefined) pageNr = nr;
+    if(pageNr<0) {
+        pageNr = 0;
+        go = false;
+    }
+    if(pageNr>=pageMax) {
+        pageNr = pageMax-1;
+        go = false;
+    }
+    if(go) displayPage();
+}
+
+function prev() {
+    pageNr--;
+    page();
+}
+
+function next() {
+    pageNr++;
+    page();
+}
+
+$(document).ready( function() {
+    $('#paginator').keypress(function(e) {
+        if(e.which == 13) page($(this).val()-1);
+    });
+});

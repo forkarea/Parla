@@ -115,6 +115,9 @@ $maxAge = 70;
 		<div id="results">
 
 		</div>
+                <button onclick="prev()">Previous</button>
+                <input id="paginator" placeholder="page nr"/>
+                <button onclick="next()">Next</button>
 	</div>
 </div>
 <?php endblock() ?>
