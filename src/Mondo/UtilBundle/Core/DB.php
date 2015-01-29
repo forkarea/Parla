@@ -26,6 +26,29 @@ class DB {
         return $result;
     }
 
+    public static function queryMulti($list) {
+        $conn = new \mysqli(\Parameters::DB_HOST, \Parameters::DB_USER, \Parameters::DB_PASSWORD, \Parameters::DB_NAME);
+        if ($conn->connect_error) {
+            throw new \Exception("Connection failed: " . $conn->connect_error);
+        }
+
+        $query = '';
+        foreach($list as $elem) {
+            $queryLine = $elem[0];
+            if(isset($elem[1])) $args = $elem[1];
+            else $args = [];
+            $ar = [];
+            foreach($args as $a) $ar[] = $conn->real_escape_string($a);
+            $query .= vsprintf($queryLine, $ar).';';
+        }
+
+        $result = $conn->multi_query($query);
+        self::$lastQuery = $query;
+        file_put_contents('log.txt', "\n\nquery: ".$query, FILE_APPEND);
+        $conn->close();
+        return $result;
+    }
+
     public static function queryRow($sql, $args) {
         return self::query($sql, $args)->fetch_assoc();
     }
