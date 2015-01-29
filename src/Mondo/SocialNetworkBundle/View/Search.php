@@ -115,9 +115,18 @@ $maxAge = 70;
 		<div id="results">
 
 		</div>
-                <button onclick="prev()">Previous</button>
-                <input id="paginator" placeholder="page nr"/>
-                <button onclick="next()">Next</button>
+                <div style="text-align:center">
+                    <button onclick="prev()" style="width:20%">Previous</button>
+                    <input id="paginator" style="width:20%" placeholder="page nr"/>
+                    <span id="totalPages" style="width:20%"></span>
+                    <button onclick="next()" style="width:20%">Next</button>
+                    <select id="onOnePage" style="width:20%">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
 	</div>
 </div>
 <?php endblock() ?>

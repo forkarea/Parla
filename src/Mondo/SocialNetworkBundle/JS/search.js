@@ -30,14 +30,15 @@ function search() {
             )+'&args='+encodeURIComponent(JSON.stringify({city: city, country: country, age_from: age_from, age_to: age_to, gender: gender, orientation: orientation}));
     $.get(url, function(data) {
         console.log('data='+JSON.stringify(data));
-        display(data);
+        searchData = data;
+        display();
     });
     console.log('url='+url);
 }
 
-function display(data) {
-    searchData = data;
-    pageMax = Math.floor(data.length/onOnePage)+1;
+function display() {
+    pageMax = Math.floor(searchData.length/onOnePage)+1;
+    $('#totalPages').html('/'+pageMax);
     pageNr = 0;
     displayPage();
 }
@@ -65,7 +66,8 @@ function page(nr) {
         pageNr = pageMax-1;
         go = false;
     }
-    if(go) displayPage();
+    $('#paginator').val(pageNr+1);
+    displayPage();
 }
 
 function prev() {
@@ -81,5 +83,9 @@ function next() {
 $(document).ready( function() {
     $('#paginator').keypress(function(e) {
         if(e.which == 13) page($(this).val()-1);
+    });
+    $('#onOnePage').change(function(e) {
+        onOnePage = $(this).val()*1;
+        display();
     });
 });
