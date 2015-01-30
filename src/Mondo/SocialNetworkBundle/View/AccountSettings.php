@@ -39,7 +39,7 @@ $entity = new User($user);
                         </div>
                         <div class="col-xs-12">
                         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                                <a href="app.php?action=verify&id=<?= $user['id'] ?>">Reset password</a> <br/>
+                                <a href="app.php?action=reset_password&email=<?= $user['mail'] ?>">Reset password</a> <br/>
                         </div>
                 </div>
         </div>
@@ -70,7 +70,6 @@ $entity = new User($user);
                                 <div class="row row-sett">
                                         <div class="col-xs-4">
                                                 Verified: 
-                                                <?= Session::getSessionData('errors_mail') ?>
                                         </div>
                                         <div class="col-xs-8">
                                             <span><?= $entity->getVerified() ?></span>

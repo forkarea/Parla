@@ -12,25 +12,12 @@ require_once '../src/Mondo/UtilBundle/Core/DB.php';
 use Mondo\UtilBundle\Core\DB;
 
 class MailController {
-    public static function verify($email, $code) {
+    public static function verify($email, $subject, $msg) {
         try {
-            $text = self::getMessage($code);
-            self::sendMail($email, 'account verification', $text);
+            self::sendMail($email, $subject, $msg);
         } catch(\Exception $e) {
             throw $e;
         }
-    }
-
-    private static function getMessage($code) {
-        $domain_name = \Parameters::DOMAIN_NAME;
-        $path = \Parameters::PATH;
-        $project_name = \Parameters::PROJECT_NAME;
-        return <<<DELIM
-Thank you for your registration, to complete your registration process, please open the following link:
-http://$domain_name/public/{$path}{$project_name}/web/app.php?action=verify_after&code=$code
-
-This email has been generated automatically, please do not respond.
-DELIM;
     }
 
     private static function sendMail($email, $subject, $msg) {
@@ -56,7 +43,7 @@ DELIM;
 
 
 try {
-    MailController::verify(urldecode($argv[1]), $argv[2]);
+    MailController::verify(urldecode($argv[1]), urldecode($argv[2]), urldecode($argv[3]));
     DB::query('INSERT INTO emails VALUES ("%s", 1) ON DUPLICATE KEY UPDATE is_correct=1', [urldecode($argv[1])]);
 } catch(\Exception $e) {
     DB::query('INSERT INTO emails VALUES ("%s", 0) ON DUPLICATE KEY UPDATE is_correct=0', [urldecode($argv[1])]);

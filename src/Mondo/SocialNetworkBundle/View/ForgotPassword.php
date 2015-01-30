@@ -24,29 +24,18 @@ use Mondo\UtilBundle\Core\Session;
 	<div class="panel-heading">
 		<h1 class="panel-title">
 		<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
-		 Log in</h1>
+		Forgot password</h1>
 	</div>
 	<div class="panel-body">
-		<form action="app.php?action=go" method="post">
-			take advantage of the quick registration:
+		<form action="app.php?action=reset_password" method="post">
 			<div class="frame">
-				<input placeholder="Name" name="name"/>
-				<span class="error"><?= Session::getSessionData('errors_name') ?></span>
-			</div>
-			<div class="frame">
-				or log in if you already have account:
 				</br>
-				<input placeholder="Enter your key or e-mail address" name="key"/>
-				<br/>
-				<input placeholder="Enter your password" type="password" name="password"/>
+				<input placeholder="Enter your e-mail address" name="key"/>
 				<br/>
 				<span class="error"><?= Session::getSessionData('errors') ?></span>
 			</div>
 			<div class="go">
-				<input class="checkB" type="checkbox" name="remember" value="yes" /><span class="sign">Keep me signed in</span>
-                                <input onclick="window.location.href='app.php?action=forgot_password'"
-                                    class="btn btn-success btn-log" type="button" value="I forgot my password"/>
-				<button class="btn btn-success btn-log">LOGIN</button>
+				<button class="btn btn-success btn-log">RESET</button>
 			</div>
 		</form>
 	</div>
@@ -55,3 +44,4 @@ use Mondo\UtilBundle\Core\Session;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="../components/bootstrap/js/bootstrap.js"></script>
 <?php endblock() ?>
+

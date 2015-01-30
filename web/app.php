@@ -57,20 +57,31 @@ $actions = [
     'update_password' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::updatePassword();
     },
+    'reset_after' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::resetAfter();
+    },
     'verify' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::verify($_GET['id']);
     },
     'verify_after' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::verifyAfter($_GET['code']);
     },
+    'reset_view' => function() {
+        include '../src/Mondo/SocialNetworkBundle/View/ResetPassword.php';
+    },
     'reset_password' => function() {
-        Mondo\SocialNetworkBundle\Controller\UserController::resetPassword($_GET['code']);
+        if(isset($_GET['email'])) $email = $_GET['email'];
+        else $email = $_POST['email'];
+        Mondo\SocialNetworkBundle\Controller\UserController::resetPassword($email);
     },
     'search' => function() {
         include '../src/Mondo/SocialNetworkBundle/View/Search.php';
     },
     'ajax_query' => function() {
         Mondo\UtilBundle\Core\DB::ajaxQuery(urldecode($_GET['query']), json_decode(urldecode($_GET['args']), true));
+    },
+    'forgot_password' => function() {
+        include '../src/Mondo/SocialNetworkBundle/View/ForgotPassword.php';
     }
 ];
 

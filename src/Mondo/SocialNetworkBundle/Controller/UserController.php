@@ -16,8 +16,11 @@ use Mondo\SocialNetworkBundle\Controller\MyCookie;
 class UserController {
     public static function autoGo($from) {
         MyCookie::read();
-        if($from=='home') if(Session::getSessionData('key') != "") header('Location: app.php?action=chat');
-        if($from!='home') if(Session::getSessionData('key') == "") header('Location: app.php');
+        if($from=='home' || $from=='forgot_password') {
+            if(Session::getSessionData('key') != "") header('Location: app.php?action=chat');
+        } else {
+            if(Session::getSessionData('key') == "") header('Location: app.php');
+        }
     }
 
     private static function univLogin($id, $name, $key, $password, $verified, $ok, $errMsg) {
@@ -191,7 +194,7 @@ class UserController {
         header('Location: app.php');
     }
 
-    public static function updatePassword() {
+    private static function checkNewPassword() {
         if($_POST['new'] == '') {
             Session::toSession('errors', 'the password cannot be empty');
             header('Location: app.php?action=change_password');
@@ -202,6 +205,10 @@ class UserController {
             header('Location: app.php?action=change_password');
             return;
         }
+    }
+
+    public static function updatePassword() {
+        self::checkNewPassword();
         $isCorrect = DB::queryRow("SELECT password FROM users WHERE id=%s AND password=password('%s') LIMIT 1", [$_GET['id'], $_POST['current']], 'password');
         if(!$isCorrect) {
             Session::toSession('errors', 'incorrect password');
@@ -213,14 +220,37 @@ class UserController {
         header('Location: app.php');
     }
 
-    public static function verify($id, $email) {
+    public static function resetAfter() {
+        self::checkNewPassword();
+        if($_POST['new'] == '') {
+            Session::toSession('errors', 'the password cannot be empty');
+            header('Location: app.php?action=change_password');
+            return;
+        }
+        if($_POST['new'] != $_POST['repeat']) {
+            Session::toSession('errors', 'the passwords are not the same');
+            header('Location: app.php?action=change_password');
+            return;
+        }
+        DB::query("UPDATE users SET password=password('%s'), verified=1 WHERE id=%s LIMIT 1", [$_POST['new'], $_GET['id']]);
+        Session::toSession('password', $_POST['new']);
+        header('Location: app.php');
+    }
+
+
+    private static function preMail($id, $email, $subject, $msgFunc) {
         $code = Text::randStrAlpha(24);
         DB::query('INSERT INTO verif_codes(user_id, code) VALUES("%s", password("%s"))', [$id, $code]);
         //header('Location: ../src/Mondo/SocialNetworkBundle/Controller/MailController.php?email='.urlencode($email).'&code='.$code);
         system(PHP_BINDIR.DIRECTORY_SEPARATOR.'php ..'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'Mondo'.DIRECTORY_SEPARATOR.
-            'SocialNetworkBundle'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'MailController.php '.urlencode($email).' '.$code);
+            'SocialNetworkBundle'.DIRECTORY_SEPARATOR.'Controller'.DIRECTORY_SEPARATOR.'MailController.php '.
+            urlencode($email).' '.urlencode($subject).' '.urlencode(self::{$msgFunc}($code)));
         $is_correct = DB::queryCell('SELECT is_correct FROM emails WHERE email="%s"', [$email], 'is_correct');
         return $is_correct;
+    }
+
+    public static function verify($id, $email) {
+        return self::preMail($id, $email, 'account verification', 'getVerifMessage');
     }
 
     public static function verifyById($id) {
@@ -228,9 +258,35 @@ class UserController {
         return self::verify($id, $email);
     }
 
-    public static function resetPassword($id) {
-        $email = DB::query('SELECT mail FROM users WHERE id=%s LIMIT 1', [$id]);
-        return self::verifyById($id);
+    public static function resetPassword($email) {
+        $id = DB::queryCell("SELECT id FROM users WHERE mail='%s' LIMIT 1", [$email], 'id');
+        self::preMail($id, $email, 'password reset', 'getResetMessage');
+        file_put_contents('/home/pierre/log.txt', "\n\nemail=".$email, FILE_APPEND);
+        header('Location: app.php');
+    }
+
+    private static function getResetMessage($code) {
+        $domain_name = \Parameters::DOMAIN_NAME;
+        $path = \Parameters::PATH;
+        $project_name = \Parameters::PROJECT_NAME;
+        return <<<DELIM
+To reset your account, please open the following link:
+http://$domain_name/public/{$path}{$project_name}/web/app.php?action=reset_view&code=$code
+
+This email has been generated automatically, please do not respond.
+DELIM;
+    }
+
+    private static function getVerifMessage($code) {
+        $domain_name = \Parameters::DOMAIN_NAME;
+        $path = \Parameters::PATH;
+        $project_name = \Parameters::PROJECT_NAME;
+        return <<<DELIM
+Thank you for your registration, to complete your registration process, please open the following link:
+http://$domain_name/public/{$path}{$project_name}/web/app.php?action=verify_after&code=$code
+
+This email has been generated automatically, please do not respond.
+DELIM;
     }
 
     public static function verifyAfter($code) {
