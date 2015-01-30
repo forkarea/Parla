@@ -11,8 +11,6 @@ function search() {
     var gender = $('#gender').val();
     var orientation = $('#orientation').val();
 
-    console.log('minAge='+minAge);
-    console.log('maxAge='+maxAge);
     if(age_from=='over') age_from = maxAge+1;
     if(age_to=='under') age_to = minAge-1;
 
@@ -25,15 +23,12 @@ function search() {
     if(gender!='') query += 'gender=":gender" AND ';
     if(orientation!='') query += 'orientation=":orientation" AND ';
     query += '1 ORDER BY mykey';
-    console.log('query='+query);
     var url = 'app.php?action=ajax_query&query='+encodeURIComponent(query
             )+'&args='+encodeURIComponent(JSON.stringify({city: city, country: country, age_from: age_from, age_to: age_to, gender: gender, orientation: orientation}));
     $.get(url, function(data) {
-        console.log('data='+JSON.stringify(data));
         searchData = data;
         display();
     });
-    console.log('url='+url);
 }
 
 function display() {
@@ -44,7 +39,6 @@ function display() {
 }
 
 function displayPage(data) {
-    console.log('onOnePage='+onOnePage+' nr='+pageNr);
     $('#paginator').val(pageNr+1);
     $('#results').html('');
     for(var i=onOnePage*pageNr; i<onOnePage*(pageNr+1); i++) {

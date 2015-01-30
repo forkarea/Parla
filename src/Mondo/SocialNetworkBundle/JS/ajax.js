@@ -17,7 +17,6 @@ setInterval( function() {
 
 setInterval( function() {
     url = 'app.php?action=messages&sender='+$id+'&receiver='+receiver+'&last_id='+lastId+'&time_unit='+timeUnit+'&time_val='+timeVal;
-    console.log('url='+url);
     $.get(url, function(data) {
         var mes = $('#messages');
         mes.append(data['html']);
@@ -32,12 +31,10 @@ setInterval( function() {
                     'SELECT count(*) c FROM writing_info WHERE sender=:sender AND receiver=:receiver AND TIMESTAMPDIFF(SECOND, last_notified, now()) < :time'
                     )+'&args='+encodeURIComponent(JSON.stringify({sender: receiver, receiver: $id, time: 3}));
             $.get(url, function(data) {
-                console.log('data='+JSON.stringify(data));
                 var is_writing = data[0]['c']==1;
                 if(is_writing) $('#writing_info').show();
                 else $('#writing_info').hide();
             });
-            console.log('url='+url);
         }
 }, 1000);
 
@@ -93,7 +90,6 @@ $(document).ready( function() {
                     )+'&args='+encodeURIComponent(JSON.stringify({sender: $id, receiver: receiver}));
             $.get(url, function(data) {
             });
-            console.log('url='+url);
         }
     });
 });

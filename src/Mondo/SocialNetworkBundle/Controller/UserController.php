@@ -51,7 +51,6 @@ class UserController {
     }
 
     private static function loginById($id) {
-        file_put_contents('/home/pierre/log.txt', "\n\nloginById id=".$id, FILE_APPEND);
         $row = DB::queryRow("SELECT * FROM users WHERE BINARY id=%s limit 1", [$id]);
         self::univLogin($row['id'], $row['name'], $row['mykey'], '', $row['verified']==1, $row ? true : false, ['errors' => 'Incorrect username or password']);
     }
@@ -252,7 +251,6 @@ class UserController {
     public static function resetPassword($email) {
         $id = DB::queryCell("SELECT id FROM users WHERE mail='%s' LIMIT 1", [$email], 'id');
         self::preMail($id, $email, 'password reset', 'getResetMessage');
-        file_put_contents('/home/pierre/log.txt', "\n\nemail=".$email, FILE_APPEND);
         header('Location: app.php');
     }
 
@@ -287,11 +285,9 @@ DELIM;
     }
 
     public static function verifyAfter($code) {
-        file_put_contents('/home/pierre/log.txt', "\n\nverAfter", FILE_APPEND);
         $id = DB::queryCell('SELECT user_id FROM verif_codes WHERE password("%s")=code', [$code], 'user_id');
         DB::query('UPDATE users SET verified=1 WHERE id=%s', [$id]);
         //DB::query('DELETE FROM verif_codes WHERE password("%s")=code', [$code]);
-        echo 'xxx';
         self::loginById($id);
         header('Location: app.php');
     }
