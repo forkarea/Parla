@@ -27,11 +27,11 @@ Parla:
             checking_if_exists: yes
             login: yes
         logs: yes
-        logs_delete: no
+        logs_delete: yes
         mail_independent_from_data: no
-        message_selection: no
+        message_selection: yes
         message_to_non_online_users: no
-        password_reset: no
+        password_reset: yes
         phpunit: yes
         translations: no
         user_profile: yes
@@ -43,12 +43,11 @@ Parla:
         'Not correct username or password - on chat': no
     frontend:
         better_background: no
-        cancel: no
+        cancel: yes
         emoticons: no
         message_alert:
             view: yes
             sound: no
-        pagination: no
     project:
         file_singature: yes
         server: no

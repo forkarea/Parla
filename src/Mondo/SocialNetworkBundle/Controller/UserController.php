@@ -249,8 +249,15 @@ class UserController {
     }
 
     public static function resetPassword($email) {
-        $id = DB::queryCell("SELECT id FROM users WHERE mail='%s' LIMIT 1", [$email], 'id');
+        $row = DB::queryRow("SELECT id FROM users WHERE mail='%s' LIMIT 1", [$email]);
+        if(!$row) {
+            Session::toSession('errors', 'user with this email does not exist');
+            header('Location: app.php?action=forgot_password');
+            return false;
+        }
+        $id = $row['id'];
         self::preMail($id, $email, 'password reset', 'getResetMessage');
+        Session::clearSession();
         header('Location: app.php');
     }
 
