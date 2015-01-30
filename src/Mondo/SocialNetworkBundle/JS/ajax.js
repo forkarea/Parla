@@ -3,8 +3,11 @@
  * Author: Piotr Sroczkowski
  *
  ****************************************/
+
 var lastId = 0;
 var MAX_INT = Math.pow(2,20);
+var timeUnit = 'HOUR';
+var timeVal = '3';
 
 setInterval( function() {
     $.get('app.php?action=user_table', function(data) {
@@ -13,7 +16,8 @@ setInterval( function() {
 }, 2000);
 
 setInterval( function() {
-    url = 'app.php?action=messages&sender='+$id+'&receiver='+receiver+'&last_id='+lastId;
+    url = 'app.php?action=messages&sender='+$id+'&receiver='+receiver+'&last_id='+lastId+'&time_unit='+timeUnit+'&time_val='+timeVal;
+    console.log('url='+url);
     $.get(url, function(data) {
         var mes = $('#messages');
         mes.append(data['html']);
@@ -63,7 +67,24 @@ function userClick(id, key, name) {
     $('#user-'+key).css('background-color', 'red');
 }
 
+function refreshMsg() {
+    lastId = 0;
+    $('#messages').html('');
+}
+
 $(document).ready( function() {
+    timeUnit = $('#time_unit').val();
+    timeVal = $('#time_val').val();
+    $('#time_val').keypress(function(e) {
+        if(e.which == 13) {
+            timeVal = $(this).val();
+            refreshMsg();
+        }
+    });
+    $('#time_unit').change(function(e) {
+        timeUnit = $(this).val();
+        refreshMsg();
+    });
     $('#message').keypress(function(e) {
         if(e.which == 13) send();
         if(receiver!=null) {

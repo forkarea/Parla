@@ -17,11 +17,11 @@ $receiver = $_GET['receiver'];
 $lastId = 0;
 if(is_numeric($_GET['last_id'])) $lastId = $_GET['last_id'];
 $result = DB::query(
-    'SELECT id, text, sender, time FROM messages WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
-    [3, $sender, $receiver, $lastId]);
+    'SELECT id, text, sender, time FROM messages WHERE TIMESTAMPDIFF(%5$s, time, now()) < %1$s AND (sender=%2$s AND receiver=%3$s OR sender=%3$s AND receiver=%2$s) AND id>%4$s',
+    [$_GET['time_val'], $sender, $receiver, $lastId, $_GET['time_unit']]);
 DB::query(
-    'UPDATE messages SET just_read=1 WHERE TIMESTAMPDIFF(HOUR, time, now()) < %1$s AND sender=%3$s AND receiver=%2$s AND id>%4$s',
-    [3, $sender, $receiver, $lastId]);
+    'UPDATE messages SET just_read=1 WHERE TIMESTAMPDIFF(%5$s, time, now()) < %1$s AND sender=%3$s AND receiver=%2$s AND id>%4$s',
+    [$_GET['time_val'], $sender, $receiver, $lastId, $_GET['time_unit']]);
 
 ob_start();
 ?>

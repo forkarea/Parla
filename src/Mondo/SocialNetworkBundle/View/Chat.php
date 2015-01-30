@@ -102,6 +102,17 @@ $key = Session::getSessionData('key');
 	<div class="row chatRow">
                 <?php /* chat */ ?>
 		<div class="col-xs-9">
+                        <div>
+                            Display messages from last
+                            <input id="time_val"/ value="3">
+                            <select id="time_unit">
+                                <option value="SECOND">seconds</option>
+                                <option value="MINUTE">minutes</option>
+                                <option value="HOUR" selected>hours</option>
+                                <option value="DAY">days</option>
+                                <option value="MONTH">months</option>
+                            </select>
+                        </div>
 			<div class="chat-box">
 				<div class="chatTitle">
 					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
