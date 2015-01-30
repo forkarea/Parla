@@ -32,4 +32,11 @@ class Session {
         if(!isset($_SESSION)) session_start();
         $_SESSION = [];
     }
+
+    public static function clearErrors() {
+        if(!isset($_SESSION)) session_start();
+        foreach($_SESSION as $i => $val) {
+            if(preg_match('/errors.*/', $i)>0) $_SESSION[$i] = '';
+        }
+    }
 }

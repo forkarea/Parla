@@ -30,8 +30,7 @@ class UserController {
             Session::toSession('key', $key);
             Session::toSession('password', $password);
             Session::toSession('verified', $verified);
-            Session::toSession('errors', '');
-            Session::toSession('errors_name', '');
+            Session::clearErrors();
             file_put_contents('log.txt', "\n\nSuccessful login, username: ".$name.', key: '.$key.
                 ', time: '.(new \DateTime)->format('Y-m-d H:i:s'), FILE_APPEND);
         } else {
@@ -190,6 +189,7 @@ class UserController {
                 $_GET['id']
                 ]);
         Session::toSession('name', $_POST['name']);
+        Session::clearErrors();
         header('Location: app.php');
     }
 
@@ -217,6 +217,7 @@ class UserController {
         }
         DB::query("UPDATE users SET password=password('%s') WHERE id=%s LIMIT 1", [$_POST['new'], $_GET['id']]);
         Session::toSession('password', $_POST['new']);
+        Session::clearErrors();
         header('Location: app.php');
     }
 
@@ -224,6 +225,7 @@ class UserController {
         if(!self::checkNewPassword('reset_view')) return;
         DB::query("UPDATE users SET password=password('%s'), verified=1 WHERE id=%s LIMIT 1", [$_POST['new'], $_GET['id']]);
         Session::toSession('password', $_POST['new']);
+        Session::clearErrors();
         header('Location: app.php');
     }
 
@@ -288,6 +290,7 @@ DELIM;
     public static function prepareReset($code) {
         $id = DB::queryCell('SELECT user_id FROM verif_codes WHERE password("%s")=code', [$code], 'user_id');
         self::loginById($id);
+        Session::clearErrors();
         header('Location: app.php?action=reset_view');
     }
 
