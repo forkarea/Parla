@@ -52,10 +52,8 @@ $result = DB::query("SELECT id, name, mykey, last_notified FROM users WHERE TIME
                                                     </a>
                                                 </span>
 					</div>
-                                    <div>
-                                        <?= $amount_of_unread>0 ? $amount_of_unread : '' ?>
-                                    </div>
 				</div>
+                                <div class="unreadAmount"><?= $amount_of_unread>0 ? $amount_of_unread : '' ?></div>
                     </div>
                 <?php } ?>
 		<?php

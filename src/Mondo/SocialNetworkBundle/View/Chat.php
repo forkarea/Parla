@@ -105,9 +105,12 @@ $key = Session::getSessionData('key');
 			<div class="chat-box">
 				<div class="chatTitle">
 					<span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-					<span style="font-weight:bold">CHAT: </span><span id="chat_partner">(select chat partner)</span>
+                                        <span style="font-weight:bold">CHAT: </span>
+                                        <span id="chat_partner">(select chat partner)</span>
+                                        <span id="writing_info" style="display:none">Your partner is writing..</span>
 				</div>
-				<div class="chatHistory" id='messages'></div>
+                                <div class="chatHistory" id='messages'>
+                                </div>
 				<input class="chat" id='message'/>
 				<button class="btn btn-success sendBtn" onclick='send()'>send</button>
 			</div>
@@ -116,7 +119,6 @@ $key = Session::getSessionData('key');
 		<div class="col-xs-3">
 			<div id='user_table'></div>
 		</div>
-                <div class="col-xs-5" id="writing_info"></div>
 	</div>
 </div>
 

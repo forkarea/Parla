@@ -30,7 +30,8 @@ setInterval( function() {
             $.get(url, function(data) {
                 console.log('data='+JSON.stringify(data));
                 var is_writing = data[0]['c']==1;
-                $('#writing_info').html(is_writing ? 'is writing' : 'no');
+                if(is_writing) $('#writing_info').show();
+                else $('#writing_info').hide();
             });
             console.log('url='+url);
         }
