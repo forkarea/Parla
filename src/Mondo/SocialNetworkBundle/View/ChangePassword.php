@@ -50,6 +50,7 @@ use Mondo\UtilBundle\Core\Session;
 						<input type="password" name="repeat" />
 					</div>
 			</div>
+                                <span class="error"><?= Session::getSessionData('errors') ?></span>
 			<div class="row row-sett new-row">
 					<div class="col-xs-12">
 						<input class="btn btn-success submit-btn" type="submit" value="SUBMIT"/>
@@ -63,6 +64,5 @@ use Mondo\UtilBundle\Core\Session;
 		</form>
 	</div>
 </div>
-<?= Session::getSessionData('errors'); ?>
 <?php endblock() ?>
 

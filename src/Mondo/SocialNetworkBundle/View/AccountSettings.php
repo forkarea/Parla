@@ -58,14 +58,16 @@ $entity = new User($user);
                                 <div class="row row-sett">
                                         <div class="col-xs-4">
                                                 E-mail address: 
-                                                <?= Session::getSessionData('errors_mail') ?>
+                                                <span class="error"><?= Session::getSessionData('errors_mail') ?></span>
                                         </div>
                                         <div class="col-xs-8">
                                             <input name="email" value="<?= $user['mail'] ?>" />
                                         </div>
                                 </div>
                                 <div class="row row-sett">
-                                        (Verification e-mail will be sent if you have not verified your account yet or if you change your e-mail address.)
+                                        <span class="info_text">
+                                            (Verification e-mail will be sent if you have not verified your account yet or if you change your e-mail address.)
+                                        </span>
                                 </div>
                                 <div class="row row-sett">
                                         <div class="col-xs-4">
@@ -78,7 +80,7 @@ $entity = new User($user);
                                 <div class="row row-sett">
                                         <div class="col-xs-4">
                                                 Name: 
-                                                <?= Session::getSessionData('errors_name') ?>
+                                                <span class="error"><?= Session::getSessionData('errors_name') ?></span>
                                         </div>
                                         <div class="col-xs-8">
                                                 <input name="name" value="<?= $user['name'] ?>" />
@@ -105,7 +107,7 @@ $entity = new User($user);
                                 <div class="row row-sett">
                                         <div class="col-xs-4">
                                                 Date of birth: 
-                                                <?= Session::getSessionData('errors_birth') ?>
+                                                <span class="error"><?= Session::getSessionData('errors_birth') ?></span>
                                         </div>
                                         <div class="col-xs-8">
 											<?php $birth = new \DateTime($user['birth']) ?>

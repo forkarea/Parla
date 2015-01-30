@@ -74,3 +74,8 @@ textarea{
     color: red;
     font-size: 70%;
 }
+
+.info_text {
+    color: blue;
+    font-size: 85%;
+}
