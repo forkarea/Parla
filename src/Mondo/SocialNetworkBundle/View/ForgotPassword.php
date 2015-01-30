@@ -30,7 +30,7 @@ use Mondo\UtilBundle\Core\Session;
 		<form action="app.php?action=reset_password" method="post">
 			<div class="frame">
 				</br>
-				<input placeholder="Enter your e-mail address" name="key"/>
+				<input placeholder="Enter your e-mail address" name="email"/>
 				<br/>
 				<span class="error"><?= Session::getSessionData('errors') ?></span>
 			</div>

@@ -60,6 +60,9 @@ $actions = [
     'reset_after' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::resetAfter();
     },
+    'prepare_reset' => function() {
+        Mondo\SocialNetworkBundle\Controller\UserController::prepareReset($_GET['code']);
+    },
     'verify' => function() {
         Mondo\SocialNetworkBundle\Controller\UserController::verify($_GET['id']);
     },

@@ -194,21 +194,22 @@ class UserController {
         header('Location: app.php');
     }
 
-    private static function checkNewPassword() {
+    private static function checkNewPassword($action) {
         if($_POST['new'] == '') {
             Session::toSession('errors', 'the password cannot be empty');
-            header('Location: app.php?action=change_password');
-            return;
+            header('Location: app.php?action='.$action);
+            return false;
         }
         if($_POST['new'] != $_POST['repeat']) {
             Session::toSession('errors', 'the passwords are not the same');
-            header('Location: app.php?action=change_password');
-            return;
+            header('Location: app.php?action='.$action);
+            return false;
         }
+        return true;
     }
 
     public static function updatePassword() {
-        self::checkNewPassword();
+        if(!self::checkNewPassword('change_password')) return;
         $isCorrect = DB::queryRow("SELECT password FROM users WHERE id=%s AND password=password('%s') LIMIT 1", [$_GET['id'], $_POST['current']], 'password');
         if(!$isCorrect) {
             Session::toSession('errors', 'incorrect password');
@@ -221,17 +222,7 @@ class UserController {
     }
 
     public static function resetAfter() {
-        self::checkNewPassword();
-        if($_POST['new'] == '') {
-            Session::toSession('errors', 'the password cannot be empty');
-            header('Location: app.php?action=change_password');
-            return;
-        }
-        if($_POST['new'] != $_POST['repeat']) {
-            Session::toSession('errors', 'the passwords are not the same');
-            header('Location: app.php?action=change_password');
-            return;
-        }
+        if(!self::checkNewPassword('reset_view')) return;
         DB::query("UPDATE users SET password=password('%s'), verified=1 WHERE id=%s LIMIT 1", [$_POST['new'], $_GET['id']]);
         Session::toSession('password', $_POST['new']);
         header('Location: app.php');
@@ -271,7 +262,7 @@ class UserController {
         $project_name = \Parameters::PROJECT_NAME;
         return <<<DELIM
 To reset your account, please open the following link:
-http://$domain_name/public/{$path}{$project_name}/web/app.php?action=reset_view&code=$code
+http://$domain_name/public/{$path}{$project_name}/web/app.php?action=prepare_reset&code=$code
 
 This email has been generated automatically, please do not respond.
 DELIM;
@@ -287,6 +278,12 @@ http://$domain_name/public/{$path}{$project_name}/web/app.php?action=verify_afte
 
 This email has been generated automatically, please do not respond.
 DELIM;
+    }
+
+    public static function prepareReset($code) {
+        $id = DB::queryCell('SELECT user_id FROM verif_codes WHERE password("%s")=code', [$code], 'user_id');
+        self::loginById($id);
+        header('Location: app.php?action=reset_view');
     }
 
     public static function verifyAfter($code) {
