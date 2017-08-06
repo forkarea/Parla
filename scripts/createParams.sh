@@ -1,19 +1,7 @@
-########################################
-#
-# Author: Piotr Sroczkowski
-#
-########################################
-
 cd $(dirname $(realpath $0))
 cd ..
 cat <<EOF > app/parameters.php
 <?php
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
-
 class Parameters {
     /** MySQL database name */
     const DB_NAME = '$1';

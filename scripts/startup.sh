@@ -1,9 +1,3 @@
-########################################
-#
-# Author: Piotr Sroczkowski
-#
-########################################
-
 # script to set up the app on any brand new debian derivative (after litte changes on any brand new linux)
 # run this script with at least 1.8 GB of RAM
 db=Parla

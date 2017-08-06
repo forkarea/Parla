@@ -1,10 +1,4 @@
 <?php
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
-
 namespace Mondo\SocialNetworkBundle\Controller;
 
 use Mondo\UtilBundle\Core\DB;

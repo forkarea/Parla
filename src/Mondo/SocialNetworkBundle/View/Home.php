@@ -1,11 +1,3 @@
-<?php
-/****************************************
- *
- * Author: Piotr Sroczkowski, Paulina Ryfka
- *
- ****************************************/
-?>
-
 <?php include 'Base.php' ?>
 <?php
 use Mondo\UtilBundle\Core\Session;

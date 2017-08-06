@@ -1,9 +1,4 @@
 <?php
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
 namespace Mondo\SocialNetworkBundle\DataFixtures;
 
 require_once '../app/parameters.php';

@@ -1,10 +1,4 @@
 <?php
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
-
 class Parameters {
     /** MySQL database name */
     const DB_NAME = 'Parla';

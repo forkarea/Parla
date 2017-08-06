@@ -1,9 +1,3 @@
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
-
 var pageNr = 0;
 var pageMax = 5;
 var onOnePage = 5;

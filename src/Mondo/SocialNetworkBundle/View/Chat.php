@@ -1,18 +1,5 @@
-<?php
-/****************************************
- *
- * Author: Piotr Sroczkowski, Paulina Ryfka
- *
- ****************************************/
-?>
-
 <?php include 'Base.php' ?>
 <?php
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
 use Mondo\UtilBundle\Core\Session;
 
 $id = Session::getSessionData('id');

@@ -1,9 +1,3 @@
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
-
 var lastId = 0;
 var MAX_INT = Math.pow(2,20);
 var timeUnit = 'HOUR';

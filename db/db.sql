@@ -1,9 +1,3 @@
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
-
 DROP TABLE IF EXISTS messages;
 CREATE TABLE messages (
   id int(11) NOT NULL AUTO_INCREMENT,

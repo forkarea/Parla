@@ -1,10 +1,4 @@
 <?php
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
-
 require_once '../vendor/swiftmailer/swiftmailer/lib/swift_required.php';
 require_once '../app/parameters.php';
 require_once '../src/Mondo/UtilBundle/Core/DB.php';

@@ -1,9 +1,4 @@
 <?php
-/****************************************
- *
- * Author: Piotr Sroczkowski
- *
- ****************************************/
 namespace Mondo\UtilBundle\Tests;
 
 require_once '../app/parameters.php';

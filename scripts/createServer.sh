@@ -1,9 +1,3 @@
-########################################
-#
-# Author: Piotr Sroczkowski
-#
-########################################
-
 searchTerm='/var/www/html/cgi'
 file='/etc/apache2/apache2.conf'
 grep -q "$searchTerm" "$file" ||
